@@ -3,11 +3,17 @@
  * @autor Jeisson Rosas
  */
 
-require_once 'app/controllers/application_controller.php';
-require_once 'app/controllers/icontroller.php';
-require_once 'app/models/departament.php';
-require_once 'app/models/city.php';
-require_once "app/helpers/cities_helper.php";
+require_once 'config/routes.php';
+require_once Route::getControllerPath("application");
+require_once Route::getControllerPath("i");
+require_once Route::getModelPath("city");
+require_once Route::getModelPath("departament");
+require_once Route::getHelperPath("cities");
+//require_once 'app/controllers/application_controller.php';
+//require_once 'app/controllers/icontroller.php';
+//require_once 'app/models/departament.php';
+//require_once 'app/models/city.php';
+//require_once "app/helpers/cities_helper.php";
 
 class CitiesController extends ApplicationController implements IController {
     
@@ -28,7 +34,7 @@ class CitiesController extends ApplicationController implements IController {
                
         $cities = $city->getCities();
         if($cities != '') {
-            include 'app/views/cities/cities.php';
+            include Route::getViewsPath("cities", "cities");//'app/views/cities/cities.php';
             $datos = ob_get_clean();
             $html = $datos;                
             
@@ -49,7 +55,7 @@ class CitiesController extends ApplicationController implements IController {
         
         ob_start(); 
         $departaments = $tmp->getDepartaments();
-        include 'app/views/cities/new.php';
+        include Route::getViewsPath("cities", "new");//'app/views/cities/new.php';
         $datos = ob_get_clean();
         $html = $datos;  
         
@@ -68,7 +74,7 @@ class CitiesController extends ApplicationController implements IController {
         
         ob_start(); 
         $departaments = $tmp->getDepartaments();
-        include 'app/views/cities/edit.php';
+        include Route::getViewsPath("cities", "edit");//'app/views/cities/edit.php';
         $datos = ob_get_clean();
         $html = $datos;  
         
@@ -95,7 +101,7 @@ class CitiesController extends ApplicationController implements IController {
                
         $cities = $city->getCities();
         if($cities != '') {
-            include 'app/views/cities/cities.php';
+            include Route::getViewsPath("cities", "cities");//'app/views/cities/cities.php';
             $datos = ob_get_clean();
             $html = $datos;                
             
@@ -124,7 +130,7 @@ class CitiesController extends ApplicationController implements IController {
                
         $cities = $city->getCities();
         if($cities != '') {
-            include 'app/views/cities/cities.php';
+            include Route::getViewsPath("cities", "cities");//'app/views/cities/cities.php';
             $datos = ob_get_clean();
             $html = $datos;                
             
@@ -194,7 +200,7 @@ class CitiesController extends ApplicationController implements IController {
         $cities = $city->show($params['id']);
             
         if($cities != '') {
-            include 'app/views/cities/show.php';
+            include Route::getViewsPath("cities", "show");//'app/views/cities/show.php';
             $datos = ob_get_clean();
             $html = $datos;     
         }

@@ -1,0 +1,90 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 23, 2013, 10:16:03 AM
+    Author     : Jeisson Rosas
+*/
+
+body {
+    margin: 0 auto;
+}
+
+div {
+    margin: 0 auto;
+}
+
+h6 {
+    color: #f5110a;
+}
+
+a {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#header {
+    background-color: #0a60f5;
+    color: #FFF;
+    height: 60px;
+    width: 100%;
+    vertical-align: middle;
+    margin: 0 auto;
+}
+
+#header a {
+    color: #FFF;
+}
+
+#footer {
+    background-color: #0a60f5;
+    color: #FFF;
+    height: 60px;
+    width: 100%;
+    vertical-align: middle;
+    margin: 0 auto;
+}
+
+.button-delete {
+    background-color: #ff7500;
+    border: #ff6600 solid;
+    border-radius: 5px;
+    color: #FFF;
+    font-stretch: expanded;
+    text-decoration: none;
+}
+
+.button-delete:hover {
+    background-color: #f5110a;
+}
+
+.button-edit {
+    background-color: #0af522;
+    border: #01f519 solid;
+    border-radius: 5px;
+    color: #FFF;
+    font-stretch: expanded;
+    text-decoration: none;
+}
+
+.button-edit:hover {
+    background-color: #02c812;
+}
+
+.content-data {
+    max-height: 400px;
+    overflow-y: auto;
+    border: #0a9af5 solid;
+    border-radius: 5px;
+}
+
+.content-data table th {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.content-data table tr {
+    height: 25px;
+}

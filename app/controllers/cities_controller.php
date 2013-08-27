@@ -9,11 +9,6 @@ require_once Route::getControllerPath("i");
 require_once Route::getModelPath("city");
 require_once Route::getModelPath("departament");
 require_once Route::getHelperPath("cities");
-//require_once 'app/controllers/application_controller.php';
-//require_once 'app/controllers/icontroller.php';
-//require_once 'app/models/departament.php';
-//require_once 'app/models/city.php';
-//require_once "app/helpers/cities_helper.php";
 
 class CitiesController extends ApplicationController implements IController {
     

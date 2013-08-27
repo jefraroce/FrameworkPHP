@@ -1,4 +1,3 @@
-    
     function editCity(id, code, name, depart) {
         renderQuery('.content', 'index.php', { id: id, code: code, name: name, depart_id: depart, controller: "cities", action: "edit" });
     }

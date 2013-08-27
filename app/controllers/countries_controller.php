@@ -5,6 +5,7 @@
 require_once 'app/controllers/application_controller.php';
 require_once 'app/controllers/icontroller.php';
 require_once 'app/models/country.php';
+require_once "app/helpers/countries_helper.php";
 
 class CountriesController extends ApplicationController implements IController {
     
@@ -143,7 +144,7 @@ class CountriesController extends ApplicationController implements IController {
 
         $countries = $country->getCountries();
         if($countries != '') {
-            include 'app/helpers/countries_helper.php';
+            paintRow($countries);
             $datos = ob_get_clean();
             $html = $datos;                
             $this->viewPage($html);
@@ -164,7 +165,7 @@ class CountriesController extends ApplicationController implements IController {
         $countries = $country->search($params['name']);
             
         if($countries != '') {
-            include 'app/helpers/countries_helper.php';
+            paintRow($countries);
             $datos = ob_get_clean();
             $html = $datos;                
             $this->viewPage($html);

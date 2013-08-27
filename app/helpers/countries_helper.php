@@ -1,4 +1,5 @@
-<?php $n = 1;
+<?php function paintRow($countries) {
+    $n = 1;
     foreach ($countries as $country) { ?>
         <tr id="<?php echo $country['_id']; ?>">
             <td><?php echo $n; ?></td>
@@ -11,4 +12,5 @@
             }">DELETE</a></td>
        </tr>
     <?php $n++;
-    } ?>
+    } 
+} ?>

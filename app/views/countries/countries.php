@@ -14,7 +14,7 @@
         </tr>
         </thead>
         <tbody id="countries-list">
-            <?php include "app/helpers/countries_helper.php"; ?>
+            <?php paintRow($countries); ?>
         </tbody>
     </table>
 </div>

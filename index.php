@@ -1,24 +1,20 @@
 <?php
-/**
- * @autor Jeisson Rosas
- */
-
-include "app/controllers/".(isset($_REQUEST['controller']) ? $_REQUEST['controller'] : "countries" )."_controller.php";
-
-$con_class = (isset($_REQUEST['controller']) ? $_REQUEST['controller'] : "countries" )."Controller";
-
-$controller = new $con_class();
-
-$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "index" ;
-    
-if(isset($_REQUEST['controller']) && isset($_REQUEST['action'])) {
-
-    $controller->$_REQUEST['action']($_REQUEST);
-    
-} else {
-    
-    $controller->index();
+  /**
+   * @autor Jeisson Rosas
+   */
+  $params = $_REQUEST;
+  $controller = ( ( !isset( $params[ 'controller' ] ) || empty( $params[ 'controller' ] ) ) ? 'countries' : $params[ 'controller' ] );
+  $action = ( ( !isset( $params[ 'action' ] ) || empty( $params[ 'action' ] ) ) ? 'index' : $params[ 'action' ] );
+  $view = $action;
+  
+  require_once( 'app/controllers/' . $controller . '_controller.php' );
+  
+  $controllerClass = ucfirst( strtolower( $controller ) ) . 'Controller';
+  $objController = new $controllerClass();
+  
+  if ( !empty( $objController ) && method_exists( $objController, $action ) ) {
+    $objController->$action( $params );
+  } else {
+    $objController->index();
     //echo phpinfo();
-    
-}
-?>
+  }

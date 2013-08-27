@@ -7,4 +7,4 @@
 <?php } ?>
 <br/>
 <a onClick="editCountry('<?php echo $tmp['_id']; ?>', '<?php echo $tmp['code']; ?>', '<?php echo utf8_encode($tmp['name']);?>');">Edit</a>&nbsp;
-<a href="?controller=countries&action=index">Back</a>
+<a onClick="pathCountry();">Back</a>

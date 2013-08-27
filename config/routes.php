@@ -20,7 +20,7 @@ class Route {
         return self::CONTROLLERS_PATH.$controller."_controller.php";
     }
     
-    public static function getViewsPath($controller, $view) {
+    public static function getViewPath($controller, $view) {
         return self::VIEWS_PATH.$controller."/".$view.".php";
     }
     

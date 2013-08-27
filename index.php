@@ -3,17 +3,18 @@
  * @autor Jeisson Rosas
  */
 
-include "app/controllers/".(isset($_REQUEST['controller']) ? $_REQUEST['controller'] : "countries" )."_controller.php";
+require_once 'config/routes.php';
+require_once Route::getControllerPath(( (isset($_REQUEST['controller']) && !empty($_REQUEST['controller']) ) ? $_REQUEST['controller'] : "countries" ));
 
-$con_class = (isset($_REQUEST['controller']) ? $_REQUEST['controller'] : "countries" )."Controller";
+$controllerClass = ( ( isset($_REQUEST['controller']) && !empty($_REQUEST['controller']) ) ? $_REQUEST['controller'] : "Countries" )."Controller";
 
-$controller = new $con_class();
+$controller = new $controllerClass();
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "index" ;
     
-if(isset($_REQUEST['controller']) && isset($_REQUEST['action'])) {
+if(!empty( $controller ) && method_exists( $controller, $action )) {
 
-    $controller->$_REQUEST['action']($_REQUEST);
+    $controller->$action($_REQUEST);
     
 } else {
     

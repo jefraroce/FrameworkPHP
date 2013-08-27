@@ -24,6 +24,14 @@ function renderQuery( selector, url, options ) {
   jQuery.ajax( ajaxOptions );
 }
 
-function prueba() {
-    alert('Probando :D');
-}
+    function pathCountry() {
+        location.href = "?controller=countries&action=index";
+    }
+
+    function pathDepartament() {
+        location.href = "?controller=departaments&action=index";
+    }
+    
+    function pathCity() {
+        location.href = "?controller=cities&action=index";
+    }

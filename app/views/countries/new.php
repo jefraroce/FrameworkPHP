@@ -1,7 +1,7 @@
 <?php
 
-include 'app/views/countries/_form.php';
+include Route::getViewPath("countries", "_form");//'app/views/countries/_form.php';
 
 ?>
 <br/>
-<a href="?controller=countries&action=index">Back</a>
+<a onClick="pathCountry();">Back</a>

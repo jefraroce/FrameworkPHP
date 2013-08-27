@@ -23,7 +23,6 @@
     </select>
     <br/><br/>
     <input type="submit" value="SAVE" />
-    <!--<button id="saveCountry">SAVE</button>-->
     <br/>
     <div id="response-data"></div>
 </form>

@@ -1,3 +1,4 @@
+    
     function editCity(id, code, name, depart) {
         renderQuery('.content', 'index.php', { id: id, code: code, name: name, depart_id: depart, controller: "cities", action: "edit" });
     }
@@ -16,8 +17,4 @@
     
     function createCity() {
         location.href = '?controller=cities&action=create';
-    }
-    
-    function pathCity() {
-        location.href = "?controller=cities&action=index";
     }

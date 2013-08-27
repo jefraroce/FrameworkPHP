@@ -1,8 +1,8 @@
 <?php
 
-include 'app/views/countries/_form.php';
+include Route::getViewPath("countries", "_form");//'app/views/countries/_form.php';
 
 ?>
 <br/>
-<a href="?controller=countries&action=show&id=<?php echo $params['id']; ?>">Show</a>&nbsp;
-<a href="?controller=countries&action=index">Back</a>
+<a onClick="showCountry('<?php echo $params['id']; ?>');">Show</a>&nbsp;
+<a onClick="pathCountry();">Back</a>

@@ -64,7 +64,7 @@ class CitiesController extends ApplicationController implements IController {
      */
     function edit ($params) {
         
-        //$pagina = $this->loadTemplate("Edit City", $this->script);
+        $pagina = $this->loadTemplate("Edit City", $this->script);
         $tmp = new Departament();        
         
         ob_start(); 
@@ -73,9 +73,9 @@ class CitiesController extends ApplicationController implements IController {
         $datos = ob_get_clean();
         $html = $datos;  
         
-	//$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
+	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
         
-	$this->viewPage($html);
+	$this->viewPage($pagina);
     }
     
     /**
@@ -206,4 +206,3 @@ class CitiesController extends ApplicationController implements IController {
     }
 
 }
-?>

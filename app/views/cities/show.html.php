@@ -8,5 +8,5 @@
 <br/>
 <?php } ?>
 <br/>
-<a onClick="editCity('<?php echo $tmp['_id']; ?>', '<?php echo $tmp['code']; ?>', '<?php echo utf8_encode($tmp['name']);?>', '<?php echo utf8_encode($tmp['depart_id']);?>');">Edit</a>&nbsp;
-<a onClick="pathCity();">Back</a>
+<a href="<?php echo Route::getUrlFor("cities", "edit", array("id" => $tmp['_id'], "code" => $tmp['code'], "name" => utf8_encode($tmp['name']), "depart_id" => utf8_encode($tmp['depart_id']) ) );?>">Edit</a>&nbsp;
+<a href="<?php echo Route::getUrlFor("cities", "index"); ?>">Back</a>

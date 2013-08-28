@@ -20,4 +20,4 @@
     </table>
 </div>
 <br/>
-<button onClick="createDepartament();">New Departament</button>
+<button onClick="location.href = '<?php echo Route::getUrlFor("departaments", "create"); ?>'; ">New Departament</button>

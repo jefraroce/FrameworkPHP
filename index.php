@@ -21,6 +21,5 @@ if(!empty( $controllerObj ) && method_exists( $controllerObj, $action )) {
 } else {
     
     $controllerObj->index();
-    //echo phpinfo();
     
 }

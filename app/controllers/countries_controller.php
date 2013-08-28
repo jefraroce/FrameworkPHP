@@ -11,7 +11,7 @@ require_once Route::getHelperPath('countries');
 
 class CountriesController extends ApplicationController implements IController {
     
-    var $script = "<script type=\"text/javascript\" src=\"app/assets/js/countries.js.php\"></script>";
+    var $script = "<script type=\"text/javascript\" src=\"app/assets/js/countries.js\"></script>";
     
     function __construct() {}
     
@@ -60,16 +60,16 @@ class CountriesController extends ApplicationController implements IController {
      */
     function edit ($params) {
         
-        //$pagina = $this->loadTemplate("Edit Country", $this->script);
+        $pagina = $this->loadTemplate("Edit Country", $this->script);
         
         ob_start(); 
         include Route::getViewPath("countries", "edit");//'app/views/countries/edit.php';
         $datos = ob_get_clean();
         $html = $datos;  
         
-	//$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
+	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
         
-	$this->viewPage($html);
+	$this->viewPage($pagina);
     }
     
     /**
@@ -158,20 +158,19 @@ class CountriesController extends ApplicationController implements IController {
      * @param type $params
      */
     function search ($params) {
-        
-        ob_start();
-        
+
         $country = new Country();
         
         $countries = $country->search($params['key'], $params['value']);
             
         if($countries != '') {
+            ob_start();
             paintRow($countries);
             $datos = ob_get_clean();
             $html = $datos;                
             $this->viewPage($html);
-        }
-        echo $params['name'];
+        } 
+        
     }
 
     /**

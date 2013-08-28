@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/var/www/Test_php/app/views/departaments/_form.php</file>
-            <file>file:/var/www/Test_php/app/views/departaments/show.php</file>
-            <file>file:/var/www/Test_php/app/views/departaments/departaments.php</file>
-            <file>file:/var/www/Test_php/app/views/departaments/edit.php</file>
-            <file>file:/var/www/Test_php/app/views/departaments/new.php</file>
-            <file>file:/var/www/Test_php/app/views/cities/_form.php</file>
-            <file>file:/var/www/Test_php/index.php</file>
-            <file>file:/var/www/Test_php/app/views/cities/edit.php</file>
-            <file>file:/var/www/Test_php/app/views/cities/cities.php</file>
-            <file>file:/var/www/Test_php/app/controllers/departaments_controller.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -8,7 +8,7 @@ class Route {
     const SEPARATOR = "/";
     
     /**
-     * Return absolute Root Path
+     * Return route absolute to Root Path
      * @return String
      */
     public static function getRootPath() {
@@ -16,7 +16,7 @@ class Route {
     }
     
     /**
-     * Return absolute url to App Path
+     * Return route absolute to App Path
      * @return String
      */
     public static function getAppPath() {
@@ -24,7 +24,7 @@ class Route {
     }
     
     /**
-     * Return absolute url to a Controller or Controllers Path
+     * Return route absolute to a Controller or Controllers Path
      * @param String $controller - name of the controller
      * @return String
      */
@@ -37,9 +37,9 @@ class Route {
     }
     
     /**
-     * Return absolute url to one View. 
-     * If the param controller is empty return absolute url to the directory views.
-     * If the param view is empty return absolute url to the directory views of the controller. Example views/users
+     * Return route absolute to one View. 
+     * If the param controller is empty return route absolute to the directory views.
+     * If the param view is empty return route absolute to the directory views of the controller. Example views/users
      * @param String $controller - name of the controller
      * @param String $view - name of the view
      * @return String
@@ -55,39 +55,78 @@ class Route {
     }
     
     /**
-     * Return relative url to a Model
+     * Return route absolute to a Model
      * @param String $model - name of the model
      * @return String
      */
     public static function getModelPath($model = "") {
-        if($model == "")
+        if($model == "") {
             return self::getAppPath()."models".self::SEPARATOR;
-        else
+        } else {
             return self::getAppPath()."models".self::SEPARATOR.$model.".php";
+        }
     }
     
     /**
-     * Return relative url to a Helper
+     * Return route absolute to a Helper
      * @param String $helper - name of the helper
      * @return String
      */
     public static function getHelperPath($helper = "") {
-        if($helper == "")
+        if($helper == "") {
             return self::getAppPath()."helpers".self::SEPARATOR;
-        else
+        } else {
             return self::getAppPath()."helpers".self::SEPARATOR.$helper."_helper.php";
+        }
     }
     
     /**
-     * Return absolute url to a Layout
+     * Return route absolute to a Layout
      * @param String $layout - name of the layout
      * @return String
      */
     public static function getLayoutPath($layout = "") {
-        if($layout == "")
+        if($layout == "") {
             return self::getViewPath()."layouts".self::SEPARATOR;
-        else
+        } else {
             return self::getViewPath()."layouts".self::SEPARATOR.$layout.".php";
+        }
     }
+    
+     /**
+     * Return current URL
+     * @param Boolean $root - if you want just the base URL
+     * @return String
+     **/
+    public static function getCurrentUrl( $root = false ) {
+      $scheme = ( isset( $_SERVER[ 'HTTPS' ] ) && $_SERVER[ 'HTTPS' ] == 'on' ) ? 'https://' : 'http://';
+      $domain = $_SERVER[ 'SERVER_NAME' ];
+      $port = ( $_SERVER[ 'SERVER_PORT' ] != '80' ) ? ( ':' . $_SERVER[ 'SERVER_PORT' ] ) : '';
+      $currentUrl = $scheme . $domain . $port;
+      $currentUrl .= ( ( $root === true ) ? dirname( $_SERVER[ 'SCRIPT_NAME' ] ) : $_SERVER[ 'REQUEST_URI' ] );
+      
+      return( $currentUrl );
+    }
+    
+    /**
+     * Return URL based on the "controller", "action" and "params"
+     * @param String $controller - Controller
+     * @param String $action - Action
+     * @param String $params - Parameters
+     * @return String
+     **/
+    public static function getUrlFor( $controller, $action = '', $params = null ) {
+      $url = ( self::getCurrentUrl( true ).self::SEPARATOR );
+      
+      if ( !empty( $controller ) ) { $url .= '?controller=' . $controller; }
+      if ( !empty( $action ) ) { $url .= ( ( strpos( $url, '?' ) === false ) ? '?' : '&' ) . 'action=' . $action; }
+      if ( $params != null ) { 
+          foreach ($params as $key=>$value) {
+            $url .= ( ( strpos( $url, '?' ) === false ) ? '?' : '&' ) . $key."=".$value; 
+          }
+      }
+      
+      return( $url );
+    } 
     
 }

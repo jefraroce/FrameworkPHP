@@ -64,7 +64,7 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     function edit ($params) {
         
-        //$pagina = $this->loadTemplate("Edit Departament", $this->script);
+        $pagina = $this->loadTemplate("Edit Departament", $this->script);
         $tmp = new Country();        
         
         ob_start(); 
@@ -73,9 +73,9 @@ class DepartamentsController extends ApplicationController implements IControlle
         $datos = ob_get_clean();
         $html = $datos;  
         
-	//$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
+	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
         
-	$this->viewPage($html);
+	$this->viewPage($pagina);
     }
     
     /**
@@ -206,4 +206,3 @@ class DepartamentsController extends ApplicationController implements IControlle
     }
 
 }
-?>

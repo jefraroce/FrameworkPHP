@@ -4,5 +4,5 @@ include Route::getViewPath("departaments", "_form");//'app/views/departaments/_f
 
 ?>
 <br/>
-<a onClick="showDepartament('<?php echo $params['id']; ?>');">Show</a>&nbsp;
-<a onClick="pathDepartament();">Back</a>
+<a href="<?php echo Route::getUrlFor("departaments", "show", array("id" => $params['id']) ); ?>">Show</a>&nbsp;
+<a href="<?php echo Route::getUrlFor("departaments", "index"); ?>">Back</a>

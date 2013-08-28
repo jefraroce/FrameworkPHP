@@ -6,5 +6,5 @@
 <br/>
 <?php } ?>
 <br/>
-<a onClick="editCountry('<?php echo $tmp['_id']; ?>', '<?php echo $tmp['code']; ?>', '<?php echo utf8_encode($tmp['name']);?>');">Edit</a>&nbsp;
-<a onClick="pathCountry();">Back</a>
+<a href="<?php echo Route::getUrlFor("countries", "edit", array("id" => $tmp['_id'], "code" => $tmp['code'], "name" => utf8_encode($tmp['name']) ) ); ?>">Edit</a>&nbsp;
+<a href="<?php echo Route::getUrlFor("countries", "index"); ?>">Back</a>

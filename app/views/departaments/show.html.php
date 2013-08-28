@@ -8,5 +8,5 @@
 <br/>
 <?php } ?>
 <br/>
-<a onClick="editDepartament('<?php echo $tmp['_id']; ?>', '<?php echo $tmp['code']; ?>', '<?php echo utf8_encode($tmp['name']);?>', '<?php echo utf8_encode($tmp['country_id']);?>');">Edit</a>&nbsp;
-<a onClick="pathDepartament();">Back</a>
+<a href="<?php echo Route::getUrlFor("departaments", "edit", array("id" => $tmp['_id'], "code" => $tmp['code'], "name" => utf8_encode($tmp['name']), "country_id" => utf8_encode($tmp['country_id']) ) );?>">Edit</a>&nbsp;
+<a href="<?php echo Route::getUrlFor("departaments", "index"); ?>">Back</a>

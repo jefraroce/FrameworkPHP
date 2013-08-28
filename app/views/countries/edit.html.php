@@ -4,5 +4,5 @@ include Route::getViewPath("countries", "_form");//'app/views/countries/_form.ph
 
 ?>
 <br/>
-<a onClick="showCountry('<?php echo $params['id']; ?>');">Show</a>&nbsp;
-<a onClick="pathCountry();">Back</a>
+<a href="<?php echo Route::getUrlFor("countries", "show", array("id" => $params['id'])); ?>">Show</a>&nbsp;
+<a href="<?php echo Route::getUrlFor("countries", "index"); ?>">Back</a>

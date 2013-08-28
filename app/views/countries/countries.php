@@ -1,5 +1,5 @@
 <h4>Listing Countries</h4>
-<label for="search">Search</label>&nbsp;<input type="text" id="search" name="SEARCH" size="50" placeholder="name" onkeyup="searchCountry(this.value);"/>
+<label for="search">Search</label>&nbsp;<input type="text" id="search" name="SEARCH" size="50" placeholder="name" onkeyup="searchCountry('name', this.value);"/>
 <br/><br/>
 <div class="content-data">
     <table>
@@ -19,4 +19,4 @@
     </table>
 </div>
 <br/>
-<button onClick="location.href = '?controller=countries&action=create';">New Country</button>
+<button onClick="createCountry();">New Country</button>

@@ -2,15 +2,16 @@
 /**
  * @autor Jeisson Rosas
  */
-require_once 'app/controllers/application_controller.php';
-require_once 'app/controllers/icontroller.php';
-require_once 'app/models/country.php';
-require_once "app/helpers/countries_helper.php";
+
+require_once 'config/routes.php';
+require_once Route::getControllerPath('application');
+require_once Route::getControllerPath('i');
+require_once Route::getModelPath('country');
+require_once Route::getHelperPath('countries');
 
 class CountriesController extends ApplicationController implements IController {
     
-    var $script = "<script type=\"text/javascript\" src=\"app/assets/js/application.js\"></script>
-        <script type=\"text/javascript\" src=\"app/assets/js/countries.js\"></script>";
+    var $script = "<script type=\"text/javascript\" src=\"app/assets/js/countries.js\"></script>";
     
     function __construct() {}
     
@@ -27,7 +28,7 @@ class CountriesController extends ApplicationController implements IController {
                
         $countries = $country->getCountries();
         if($countries != '') {
-            include 'app/views/countries/countries.php';
+            include Route::getViewPath("countries", "countries");//'app/views/countries/countries.php';
             $datos = ob_get_clean();
             $html = $datos;                
             
@@ -45,7 +46,7 @@ class CountriesController extends ApplicationController implements IController {
         $pagina = $this->loadTemplate("New Country", $this->script);
         
         ob_start(); 
-        include 'app/views/countries/new.php';
+        include Route::getViewPath("countries", "new");//'app/views/countries/new.php';
         $datos = ob_get_clean();
         $html = $datos;  
         
@@ -62,7 +63,7 @@ class CountriesController extends ApplicationController implements IController {
         //$pagina = $this->loadTemplate("Edit Country", $this->script);
         
         ob_start(); 
-        include 'app/views/countries/edit.php';
+        include Route::getViewPath("countries", "edit");//'app/views/countries/edit.php';
         $datos = ob_get_clean();
         $html = $datos;  
         
@@ -89,7 +90,7 @@ class CountriesController extends ApplicationController implements IController {
                
         $countries = $country->getCountries();
         if($countries != '') {
-            include 'app/views/countries/countries.php';
+            include Route::getViewPath("countries", "countries");//'app/views/countries/countries.php';
             $datos = ob_get_clean();
             $html = $datos;                
             
@@ -118,7 +119,7 @@ class CountriesController extends ApplicationController implements IController {
                
         $countries = $country->getCountries();
         if($countries != '') {
-            include 'app/views/countries/countries.php';
+            include Route::getViewPath("countries", "countries");//'app/views/countries/countries.php';
             $datos = ob_get_clean();
             $html = $datos;                
             
@@ -162,7 +163,7 @@ class CountriesController extends ApplicationController implements IController {
         
         $country = new Country();
         
-        $countries = $country->search($params['name']);
+        $countries = $country->search($params['key'], $params['value']);
             
         if($countries != '') {
             paintRow($countries);
@@ -188,7 +189,7 @@ class CountriesController extends ApplicationController implements IController {
         $countries = $country->show($params['id']);
             
         if($countries != '') {
-            include 'app/views/countries/show.php';
+            include Route::getViewPath("countries", "show");//'app/views/countries/show.php';
             $datos = ob_get_clean();
             $html = $datos;     
         }

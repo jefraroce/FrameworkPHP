@@ -18,7 +18,3 @@
     function createCity() {
         location.href = '?controller=cities&action=create';
     }
-    
-    function pathCity() {
-        location.href = "?controller=cities&action=index";
-    }

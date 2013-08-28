@@ -2,11 +2,13 @@
 /**
  * @autor Jeisson Rosas
  */
-require_once 'app/controllers/application_controller.php';
-require_once 'app/controllers/icontroller.php';
-require_once 'app/models/departament.php';
-require_once 'app/models/country.php';
-require_once "app/helpers/departaments_helper.php";
+
+require_once 'config/routes.php';
+require_once Route::getControllerPath("application");
+require_once Route::getControllerPath("i");
+require_once Route::getModelPath("departament");
+require_once Route::getModelPath("country");
+require_once Route::getHelperPath("departaments");
 
 class DepartamentsController extends ApplicationController implements IController {
     
@@ -27,7 +29,7 @@ class DepartamentsController extends ApplicationController implements IControlle
                
         $departaments = $departament->getDepartaments();
         if($departaments != '') {
-            include 'app/views/departaments/departaments.php';
+            include Route::getViewPath("departaments", "departaments");//'app/views/departaments/departaments.php';
             $datos = ob_get_clean();
             $html = $datos;                
             
@@ -48,7 +50,7 @@ class DepartamentsController extends ApplicationController implements IControlle
         
         ob_start(); 
         $countries = $tmp->getCountries();
-        include 'app/views/departaments/new.php';
+        include Route::getViewPath("departaments", "new");//'app/views/departaments/new.php';
         $datos = ob_get_clean();
         $html = $datos;  
         
@@ -67,7 +69,7 @@ class DepartamentsController extends ApplicationController implements IControlle
         
         ob_start(); 
         $countries = $tmp->getCountries();
-        include 'app/views/departaments/edit.php';
+        include Route::getViewPath("departaments", "edit");//'app/views/departaments/edit.php';
         $datos = ob_get_clean();
         $html = $datos;  
         
@@ -94,7 +96,7 @@ class DepartamentsController extends ApplicationController implements IControlle
                
         $departaments = $departament->getDepartaments();
         if($departaments != '') {
-            include 'app/views/departaments/departaments.php';
+            include Route::getViewPath("departaments", "departaments");//'app/views/departaments/departaments.php';
             $datos = ob_get_clean();
             $html = $datos;                
             
@@ -123,7 +125,7 @@ class DepartamentsController extends ApplicationController implements IControlle
                
         $departaments = $departament->getDepartaments();
         if($departaments != '') {
-            include 'app/views/departaments/departaments.php';
+            include Route::getViewPath("departaments", "departaments");//'app/views/departaments/departaments.php';
             $datos = ob_get_clean();
             $html = $datos;                
             
@@ -193,7 +195,7 @@ class DepartamentsController extends ApplicationController implements IControlle
         $departaments = $departament->show($params['id']);
             
         if($departaments != '') {
-            include 'app/views/departaments/show.php';
+            include Route::getViewPath("departaments", "show");//'app/views/departaments/show.php';
             $datos = ob_get_clean();
             $html = $datos;     
         }

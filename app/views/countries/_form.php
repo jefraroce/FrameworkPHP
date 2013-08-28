@@ -14,7 +14,6 @@
     <label for="name">NAME</label>&nbsp;<input type="text" id="name" name="name" size="50" placeholder="name" value="<?php echo (isset($params['name']) ? $params['name'] : "" ); ?>" class="required"  />
     &nbsp;&nbsp;
     <input type="submit" value="SAVE" />
-    <!--<button id="saveCountry">SAVE</button>-->
     <br/>
     <div id="response-data"></div>
 </form>

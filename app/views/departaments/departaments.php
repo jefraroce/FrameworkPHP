@@ -20,4 +20,4 @@
     </table>
 </div>
 <br/>
-<button onClick="location.href = '?controller=departaments&action=create';">New Departament</button>
+<button onClick="createDepartament();">New Departament</button>

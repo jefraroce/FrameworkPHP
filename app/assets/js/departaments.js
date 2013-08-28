@@ -10,3 +10,11 @@
     function searchDepartament(key, value) {
         renderQuery('#departaments-list', 'index.php', { key: key, value: value, controller: "departaments", action: "search" });
     }
+    
+    function showDepartament(id) {
+        location.href = "?controller=departaments&action=show&id=" + id;
+    }
+    
+    function createDepartament() {
+        location.href = '?controller=departaments&action=create';
+    }

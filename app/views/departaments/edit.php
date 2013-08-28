@@ -1,8 +1,8 @@
 <?php
 
-include 'app/views/departaments/_form.php';
+include Route::getViewPath("departaments", "_form");//'app/views/departaments/_form.php';
 
 ?>
 <br/>
-<a href="?controller=departaments&action=show&id=<?php echo $params['id']; ?>">Show</a>&nbsp;
-<a href="?controller=departaments&action=index">Back</a>
+<a onClick="showDepartament('<?php echo $params['id']; ?>');">Show</a>&nbsp;
+<a onClick="pathDepartament();">Back</a>

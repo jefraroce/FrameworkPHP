@@ -62,14 +62,15 @@ class Country {
         }
         return false;
     }
-    
+
     /**
-     * 
-     * @param type $filter
-     * @return boolean
+     * Search a country for a value
+     * @param type $key
+     * @param type $value
+     * @return null
      */
-    function search($name) {
-        if($result = $this->countries->find(array('name' => new MongoRegex("/$name/i")))->sort(array('name' => 1))) {
+    function search($key, $value) {
+        if($result = $this->countries->find(array($key => new MongoRegex("/$value/i")))->sort(array('name' => 1))) {
             return $result;
         }
         return null;

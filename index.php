@@ -7,7 +7,8 @@
   $action = ( ( !isset( $params[ 'action' ] ) || empty( $params[ 'action' ] ) ) ? 'index' : $params[ 'action' ] );
   $view = $action;
   
-  require_once( 'app/controllers/' . $controller . '_controller.php' );
+  require_once( 'config/routes.php' );
+  require_once( Route::getControllerPath( $controller ) );
   
   $controllerClass = ucfirst( strtolower( $controller ) ) . 'Controller';
   $objController = new $controllerClass();

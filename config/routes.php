@@ -90,4 +90,35 @@ class Route {
             return self::getViewPath()."layouts".self::SEPARATOR.$layout.".php";
     }
     
-}
+    /**
+     * Return current URL
+     * @param Boolean $root - if you want just the base URL
+     * @return String
+     **/
+    public static function getCurrentUrl( $root = false ) {
+      $scheme = ( isset( $_SERVER[ 'HTTPS' ] ) && $_SERVER[ 'HTTPS' ] == 'on' ) ? 'https://' : 'http://';
+      $domain = $_SERVER[ 'SERVER_NAME' ];
+      $port = ( $_SERVER[ 'SERVER_PORT' ] != '80' ) ? ( ':' . $_SERVER[ 'SERVER_PORT' ] ) : '';
+      $currentUrl = $scheme . $domain . $port;
+      $currentUrl .= ( ( $root === true ) ? dirname( $_SERVER[ 'SCRIPT_NAME' ] ) : $_SERVER[ 'REQUEST_URI' ] );
+      
+      return( $currentUrl );
+    }
+    
+    /**
+     * Return URL based on the "controller", "action" and "params"
+     * @param String $controller - Controller
+     * @param String $action - Action
+     * @param String $params - Parameters
+     * @return String
+     **/
+    public static function getUrlFor( $controller, $action = '', $params = '' ) {
+      $url = ( self::getCurrentUrl( true ) . 'index.php' );
+      
+      if ( !empty( $controllers ) ) { $url .= '?controller=' . $controllers; }
+      if ( !empty( $action ) ) { $url .= ( ( strpos( $url, '?' ) === false ) ? '?' : '&' ) . 'action=' . $action; }
+      if ( !empty( $params ) ) { $url .= ( ( strpos( $url, '?' ) === false ) ? '?' : '&' ) . $params; }
+      
+      return( $url );
+    }
+  }

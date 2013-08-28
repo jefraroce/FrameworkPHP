@@ -3,18 +3,20 @@
  * @autor Jeisson Rosas
  */
 
-require_once 'config/routes.php';
-require_once Route::getControllerPath(( (isset($_REQUEST['controller']) && !empty($_REQUEST['controller']) ) ? $_REQUEST['controller'] : "countries" ));
+$params = $_REQUEST;
 
-$controllerClass = ( ( isset($_REQUEST['controller']) && !empty($_REQUEST['controller']) ) ? $_REQUEST['controller'] : "Countries" )."Controller";
+require_once 'config/routes.php';
+require_once Route::getControllerPath(( (isset($params['controller']) && !empty($params['controller']) ) ? $params['controller'] : "countries" ));
+
+$controllerClass = ( ( isset($params['controller']) && !empty($params['controller']) ) ? $params['controller'] : "Countries" )."Controller";
 
 $controller = new $controllerClass();
 
-$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "index" ;
+$action = isset($params['action']) ? $params['action'] : "index" ;
     
 if(!empty( $controller ) && method_exists( $controller, $action )) {
 
-    $controller->$action($_REQUEST);
+    $controller->$action($params);
     
 } else {
     

@@ -4,16 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/var/www/Test_php/app/views/departaments/_form.php</file>
+            <file>file:/var/www/Test_php/app/views/departaments/show.php</file>
             <file>file:/var/www/Test_php/app/views/departaments/departaments.php</file>
-            <file>file:/var/www/Test_php/app/views/page.php</file>
+            <file>file:/var/www/Test_php/app/views/departaments/edit.php</file>
+            <file>file:/var/www/Test_php/app/views/departaments/new.php</file>
+            <file>file:/var/www/Test_php/app/views/cities/_form.php</file>
             <file>file:/var/www/Test_php/index.php</file>
-            <file>file:/var/www/Test_php/app/controllers/application_controller.php</file>
-            <file>file:/var/www/Test_php/app/helpers/departaments_helper.php</file>
-            <file>file:/var/www/Test_php/app/assets/js/application.js</file>
-            <file>file:/var/www/Test_php/app/assets/js/departaments.js</file>
-            <file>file:/var/www/Test_php/app/views/countries/new.php</file>
-            <file>file:/var/www/Test_php/app/assets/js/countries.js</file>
-            <file>file:/var/www/Test_php/app/helpers/countries_helper.php</file>
+            <file>file:/var/www/Test_php/app/views/cities/edit.php</file>
+            <file>file:/var/www/Test_php/app/views/cities/cities.php</file>
             <file>file:/var/www/Test_php/app/controllers/departaments_controller.php</file>
         </group>
     </open-files>

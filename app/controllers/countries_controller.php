@@ -11,7 +11,7 @@ require_once Route::getHelperPath('countries');
 
 class CountriesController extends ApplicationController implements IController {
     
-    var $script = "<script type=\"text/javascript\" src=\"app/assets/js/countries.js\"></script>";
+    var $script = "<script type=\"text/javascript\" src=\"app/assets/js/countries.js.php\"></script>";
     
     function __construct() {}
     
@@ -200,4 +200,3 @@ class CountriesController extends ApplicationController implements IController {
     }
 
 }
-?>

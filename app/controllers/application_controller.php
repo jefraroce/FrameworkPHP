@@ -1,22 +1,24 @@
 <?php
 
+require_once 'config/routes.php';
+
 class ApplicationController {
     
-    /* METODO QUE CARGA LAS PARTES PRINCIPALES DE LA PAGINA WEB
-	INPUT
-		$title | titulo en string del header
-	OUTPIT
-		$pagina | string que contiene toda el cocigo HTML de la plantilla 
-	*/
+    /**
+     * Load and return a Template
+     * @param String $title - Title of the page
+     * @param String $script - Code script will be add to the page
+     * @return page
+     */
     protected function loadTemplate($title = 'Test Jeisson', $script = '') {
-        $pagina = $this->loadPage('app/views/page.php');     
+        $pagina = $this->loadPage(Route::getViewPath().'page.html.php');     
             
-        $header = $this->loadPage('app/views/layouts/header.php');            
+        $header = $this->loadPage(Route::getLayoutPath("header"));            
         $pagina = $this->replaceContent('/\#HEADER\#/ms', $header, $pagina);            
         $pagina = $this->replaceContent('/\#SCRIPTS\#/ms', $script, $pagina);
         $pagina = $this->replaceContent('/\#TITLE\#/ms', $title, $pagina);
             
-        $footer = $this->loadPage('app/views/layouts/footer.php');
+        $footer = $this->loadPage(Route::getLayoutPath("footer"));
         $pagina = $this->replaceContent('/\#FOOTER\#/ms', $footer, $pagina);				
             
         return $pagina;
@@ -36,10 +38,10 @@ class ApplicationController {
     
     /**
      * Replace a string for other string on one page.
-     * @param type $in
-     * @param type $out
-     * @param type $pagina
-     * @return type
+     * @param String $in
+     * @param String $out
+     * @param page $pagina
+     * @return page
      */
     protected function replaceContent($in='/\#CONTENIDO\#/ms', $out, $pagina) {
         

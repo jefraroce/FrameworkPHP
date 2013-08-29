@@ -89,7 +89,7 @@ class Route {
         if($layout == "") {
             return self::getViewPath()."layouts".self::SEPARATOR;
         } else {
-            return self::getViewPath()."layouts".self::SEPARATOR.$layout.".php";
+            return self::getViewPath()."layouts".self::SEPARATOR.$layout.".html.php";
         }
     }
     

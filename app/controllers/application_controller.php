@@ -11,7 +11,7 @@ class ApplicationController {
      * @return page
      */
     protected function loadTemplate($title = 'Test Jeisson', $script = '') {
-        $pagina = $this->loadPage(Route::getViewPath().'page.html.php');     
+        $pagina = $this->loadPage(Route::getLayoutPath('page'));     
             
         $header = $this->loadPage(Route::getLayoutPath("header"));            
         $pagina = $this->replaceContent('/\#HEADER\#/ms', $header, $pagina);            

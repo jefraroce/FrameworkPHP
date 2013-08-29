@@ -1,3 +1,7 @@
+    
+    $(document).ready(function() {
+        $("#city_form").validate();
+     });
 
     function deleteCity(id) {
         renderQuery('#cities-list', 'index.php', { id: id, controller: "cities", action: "delete" });

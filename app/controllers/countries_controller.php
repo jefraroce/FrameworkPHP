@@ -11,8 +11,6 @@ require_once Route::getHelperPath('countries');
 
 class CountriesController extends ApplicationController implements IController {
     
-    var $script = "<script type=\"text/javascript\" src=\"app/assets/js/countries.js\"></script>";
-    
     function __construct() {}
     
     /**
@@ -22,7 +20,7 @@ class CountriesController extends ApplicationController implements IController {
          //obtiene  los registros de la base de datos
         ob_start();     
         
-        $pagina = $this->loadTemplate("Listing Countries", $this->script);
+        $pagina = $this->loadTemplate("Listing Countries");
         
         $country = new Country();
                
@@ -43,7 +41,7 @@ class CountriesController extends ApplicationController implements IController {
      */
     function create () {
         
-        $pagina = $this->loadTemplate("New Country", $this->script);
+        $pagina = $this->loadTemplate("New Country");
         
         ob_start(); 
         include Route::getViewPath("countries", "new");//'app/views/countries/new.php';
@@ -60,7 +58,7 @@ class CountriesController extends ApplicationController implements IController {
      */
     function edit ($params) {
         
-        $pagina = $this->loadTemplate("Edit Country", $this->script);
+        $pagina = $this->loadTemplate("Edit Country");
         
         ob_start(); 
         include Route::getViewPath("countries", "edit");//'app/views/countries/edit.php';
@@ -81,7 +79,7 @@ class CountriesController extends ApplicationController implements IController {
         //obtiene  los registros de la base de datos
         ob_start();     
         
-        $pagina = $this->loadTemplate("Listing Countries", $this->script);
+        $pagina = $this->loadTemplate("Listing Countries");
         
         $country = new Country();
         
@@ -110,7 +108,7 @@ class CountriesController extends ApplicationController implements IController {
         //obtiene  los registros de la base de datos
         ob_start();     
         
-        $pagina = $this->loadTemplate("Listing Countries", $this->script);
+        $pagina = $this->loadTemplate("Listing Countries");
         
         $country = new Country();
         
@@ -179,7 +177,7 @@ class CountriesController extends ApplicationController implements IController {
      */
     public function show($params) {
         
-        $pagina = $this->loadTemplate("Show Country", $this->script);
+        $pagina = $this->loadTemplate("Show Country");
         
         ob_start();
         

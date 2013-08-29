@@ -10,12 +10,16 @@ class ApplicationController {
      * @param String $script - Code script will be add to the page
      * @return page
      */
-    protected function loadTemplate($title = 'Test Jeisson', $script = '') {
-        $pagina = $this->loadPage(Route::getLayoutPath('page'));     
+    protected function loadTemplate($title = 'Test Jeisson', $header = '') {
+        ob_start();
+        include Route::getLayoutPath('page');
+        $pagina = ob_get_clean();
+        
+        //$pagina = $this->loadPage(Route::getLayoutPath('page'));     
             
         $header = $this->loadPage(Route::getLayoutPath("header"));            
         $pagina = $this->replaceContent('/\#HEADER\#/ms', $header, $pagina);            
-        $pagina = $this->replaceContent('/\#SCRIPTS\#/ms', $script, $pagina);
+        //$pagina = $this->replaceContent('/\#SCRIPTS\#/ms', $this->script, $pagina);
         $pagina = $this->replaceContent('/\#TITLE\#/ms', $title, $pagina);
             
         $footer = $this->loadPage(Route::getLayoutPath("footer"));
@@ -32,7 +36,9 @@ class ApplicationController {
 	*/	
     protected function loadPage($page) {
         
-        return file_get_contents($page);
+        ob_start();
+        include $page;
+        return ob_get_clean();
         
     }
     

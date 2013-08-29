@@ -1,8 +1,3 @@
-<script type="text/javascript">
-     $(document).ready(function() {
-        $("#country_form").validate();
-     });
-</script>
 <form action="index" method="post" id="country_form">
     <h3>COUNTRIES</h3>
     <input type="hidden" id="action" name="action" value="<?php echo (isset($params['id']) ? "update" : "insert" ); ?>" class="required" />

@@ -12,8 +12,6 @@ require_once Route::getHelperPath("cities");
 
 class CitiesController extends ApplicationController implements IController {
     
-    var $script = "<script type=\"text/javascript\" src=\"app/assets/js/cities.js\"></script>";
-    
     function __construct() {}
     
     /**
@@ -23,7 +21,7 @@ class CitiesController extends ApplicationController implements IController {
          //obtiene  los registros de la base de datos
         ob_start();     
         
-        $pagina = $this->loadTemplate("Listing Cities", $this->script);
+        $pagina = $this->loadTemplate("Listing Cities");
         
         $city = new City();
                
@@ -44,7 +42,7 @@ class CitiesController extends ApplicationController implements IController {
      */
     function create () {
         
-        $pagina = $this->loadTemplate("New City", $this->script);
+        $pagina = $this->loadTemplate("New City");
         
         $tmp = new Departament();       
         
@@ -64,7 +62,7 @@ class CitiesController extends ApplicationController implements IController {
      */
     function edit ($params) {
         
-        $pagina = $this->loadTemplate("Edit City", $this->script);
+        $pagina = $this->loadTemplate("Edit City");
         $tmp = new Departament();        
         
         ob_start(); 
@@ -87,7 +85,7 @@ class CitiesController extends ApplicationController implements IController {
         //obtiene  los registros de la base de datos
         ob_start();     
         
-        $pagina = $this->loadTemplate("Listing Cities", $this->script);
+        $pagina = $this->loadTemplate("Listing Cities");
         
         $city = new City();
         
@@ -116,7 +114,7 @@ class CitiesController extends ApplicationController implements IController {
         //obtiene  los registros de la base de datos
         ob_start();     
         
-        $pagina = $this->loadTemplate("Listing Cities", $this->script);
+        $pagina = $this->loadTemplate("Listing Cities");
         
         $city = new City();
         
@@ -186,7 +184,7 @@ class CitiesController extends ApplicationController implements IController {
      */
     public function show($params) {
         
-        $pagina = $this->loadTemplate("Show City", $this->script);
+        $pagina = $this->loadTemplate("Show City");
         
         ob_start();
         

@@ -12,8 +12,6 @@ require_once Route::getHelperPath("departaments");
 
 class DepartamentsController extends ApplicationController implements IController {
     
-    var $script = "<script type=\"text/javascript\" src=\"app/assets/js/departaments.js\"></script>";
-    
     function __construct() {}
     
     /**
@@ -23,7 +21,7 @@ class DepartamentsController extends ApplicationController implements IControlle
          //obtiene  los registros de la base de datos
         ob_start();     
         
-        $pagina = $this->loadTemplate("Listing Departaments", $this->script);
+        $pagina = $this->loadTemplate("Listing Departaments");
         
         $departament = new Departament();
                
@@ -44,7 +42,7 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     function create () {
         
-        $pagina = $this->loadTemplate("New Departament", $this->script);
+        $pagina = $this->loadTemplate("New Departament");
         
         $tmp = new Country();       
         
@@ -64,7 +62,7 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     function edit ($params) {
         
-        $pagina = $this->loadTemplate("Edit Departament", $this->script);
+        $pagina = $this->loadTemplate("Edit Departament");
         $tmp = new Country();        
         
         ob_start(); 
@@ -87,7 +85,7 @@ class DepartamentsController extends ApplicationController implements IControlle
         //obtiene  los registros de la base de datos
         ob_start();     
         
-        $pagina = $this->loadTemplate("Listing Departaments", $this->script);
+        $pagina = $this->loadTemplate("Listing Departaments");
         
         $departament = new Departament();
         
@@ -116,7 +114,7 @@ class DepartamentsController extends ApplicationController implements IControlle
         //obtiene  los registros de la base de datos
         ob_start();     
         
-        $pagina = $this->loadTemplate("Listing Departaments", $this->script);
+        $pagina = $this->loadTemplate("Listing Departaments");
         
         $departament = new Departament();
         
@@ -186,7 +184,7 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     public function show($params) {
         
-        $pagina = $this->loadTemplate("Show Departament", $this->script);
+        $pagina = $this->loadTemplate("Show Departament");
         
         ob_start();
         

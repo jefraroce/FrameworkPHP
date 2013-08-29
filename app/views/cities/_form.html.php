@@ -1,8 +1,3 @@
-<script type="text/javascript">
-     $(document).ready(function() {
-        $("#city_form").validate();
-     });
-</script>
 <form action="index" method="post" id="city_form">
     <h3>CITIES</h3>
     <input type="hidden" id="action" name="action" value="<?php echo (isset($params['id']) ? "update" : "insert" ); ?>" class="required" />

@@ -43,7 +43,7 @@ class DepartamentsController extends ApplicationController implements IControlle
         $pagina = $this->loadTemplate("New Departament");     
         
         ob_start(); 
-        //Country::initcialize();
+        
         $countries = Country::getAll();
         include Route::getViewPath("departaments", "new");//'app/views/departaments/new.php';
         $datos = ob_get_clean();

@@ -11,17 +11,13 @@ class ApplicationController {
      * @return page
      */
     protected function loadTemplate($title = 'Test Jeisson', $header = '') {
-        ob_start();
-        include Route::getLayoutPath('page');
-        $pagina = ob_get_clean();
         
-        //$pagina = $this->loadPage(Route::getLayoutPath('page'));     
+        $pagina = $this->loadPage(Route::getLayoutPath('page'));     
             
         $header = $this->loadPage(Route::getLayoutPath("header"));            
         $pagina = $this->replaceContent('/\#HEADER\#/ms', $header, $pagina);            
-        //$pagina = $this->replaceContent('/\#SCRIPTS\#/ms', $this->script, $pagina);
         $pagina = $this->replaceContent('/\#TITLE\#/ms', $title, $pagina);
-            
+        
         $footer = $this->loadPage(Route::getLayoutPath("footer"));
         $pagina = $this->replaceContent('/\#FOOTER\#/ms', $footer, $pagina);				
             

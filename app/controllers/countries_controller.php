@@ -21,10 +21,8 @@ class CountriesController extends ApplicationController implements IController {
         ob_start();     
         
         $pagina = $this->loadTemplate("Listing Countries");
-        
-        $country = new Country();
                
-        $countries = $country->getAll();
+        $countries = Country::getAll();
         if($countries != '') {
             include Route::getViewPath("countries", "countries");//'app/views/countries/countries.php';
             $datos = ob_get_clean();
@@ -81,13 +79,10 @@ class CountriesController extends ApplicationController implements IController {
         
         $pagina = $this->loadTemplate("Listing Countries");
         
-        $country = new Country();
-        
-        //if(!$country->insert($params['code'], $params['name']))
-        if(!$country->insert($params['country']))
+        if(!Country::insert($params['country']))
             echo "<h6>Error on Insert.</h6>";
                
-        $countries = $country->getAll();
+        $countries = Country::getAll();
         if($countries != '') {
             include Route::getViewPath("countries", "countries");//'app/views/countries/countries.php';
             $datos = ob_get_clean();
@@ -111,12 +106,10 @@ class CountriesController extends ApplicationController implements IController {
         
         $pagina = $this->loadTemplate("Listing Countries");
         
-        $country = new Country();
-        
-        if(!$country->update($params['country']['id'], $params['country']))
+        if(!Country::update($params['country']['id'], $params['country']))
             echo "<h6>Error on Update.</h6>";
                
-        $countries = $country->getAll();
+        $countries = Country::getAll();
         if($countries != '') {
             include Route::getViewPath("countries", "countries");//'app/views/countries/countries.php';
             $datos = ob_get_clean();
@@ -137,12 +130,10 @@ class CountriesController extends ApplicationController implements IController {
         
         ob_start();
         
-        $country = new Country();
-        
-        if(!$country->delete($params['id']))
+        if(!Country::delete($params['id']))
             echo "<h6>Error on Delete.</h6>";
 
-        $countries = $country->getAll();
+        $countries = Country::getAll();
         if($countries != '') {
             paintRow($countries);
             $datos = ob_get_clean();
@@ -157,10 +148,8 @@ class CountriesController extends ApplicationController implements IController {
      * @param type $params
      */
     function search ($params) {
-
-        $country = new Country();
         
-        $countries = $country->search($params['key'], $params['value']);
+        $countries = Country::search($params['key'], $params['value']);
             
         if($countries != '') {
             ob_start();
@@ -182,9 +171,7 @@ class CountriesController extends ApplicationController implements IController {
         
         ob_start();
         
-        $country = new Country();
-        
-        $countries = $country->show($params['id']);
+        $countries = Country::show($params['id']);
             
         if($countries != '') {
             include Route::getViewPath("countries", "show");//'app/views/countries/show.php';

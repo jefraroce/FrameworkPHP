@@ -9,7 +9,7 @@ class Country extends Db {
     
     protected static $table_name = "countries";
     
-    protected static $table_schema = array(
+    public static $table_schema = array(
      'id' => 0,
      'code' => '',
      'name' => ''

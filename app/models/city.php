@@ -9,7 +9,7 @@ class City extends Db {
     
     protected static $table_name = "cities";
     
-    protected static $table_schema = array(
+    public static $table_schema = array(
      'id' => 0,
      'code' => '',
      'name' => '',

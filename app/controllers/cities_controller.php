@@ -25,7 +25,7 @@ class CitiesController extends ApplicationController implements IController {
         
         $city = new City();
                
-        $cities = $city->getCities();
+        $cities = $city->getAll();
         if($cities != '') {
             include Route::getViewPath("cities", "cities");//'app/views/cities/cities.php';
             $datos = ob_get_clean();
@@ -47,7 +47,7 @@ class CitiesController extends ApplicationController implements IController {
         $tmp = new Departament();       
         
         ob_start(); 
-        $departaments = $tmp->getDepartaments();
+        $departaments = $tmp->getAll();
         include Route::getViewPath("cities", "new");//'app/views/cities/new.php';
         $datos = ob_get_clean();
         $html = $datos;  
@@ -66,7 +66,7 @@ class CitiesController extends ApplicationController implements IController {
         $tmp = new Departament();        
         
         ob_start(); 
-        $departaments = $tmp->getDepartaments();
+        $departaments = $tmp->getAll();
         include Route::getViewPath("cities", "edit");//'app/views/cities/edit.php';
         $datos = ob_get_clean();
         $html = $datos;  
@@ -89,10 +89,10 @@ class CitiesController extends ApplicationController implements IController {
         
         $city = new City();
         
-        if(!$city->insert($params['code'], $params['name'], $params['depart_id']))
+        if(!$city->insert($params['city']))
             echo "<h6>Error on Insert.</h6>";
                
-        $cities = $city->getCities();
+        $cities = $city->getAll();
         if($cities != '') {
             include Route::getViewPath("cities", "cities");//'app/views/cities/cities.php';
             $datos = ob_get_clean();
@@ -118,10 +118,10 @@ class CitiesController extends ApplicationController implements IController {
         
         $city = new City();
         
-        if(!$city->update($params['id'], $params['code'], $params['name'], $params['depart_id']))
+        if(!$city->update($params['city']['id'], $params['city']))
             echo "<h6>Error on Update.</h6>";
                
-        $cities = $city->getCities();
+        $cities = $city->getAll();
         if($cities != '') {
             include Route::getViewPath("cities", "cities");//'app/views/cities/cities.php';
             $datos = ob_get_clean();
@@ -147,7 +147,7 @@ class CitiesController extends ApplicationController implements IController {
         if(!$city->delete($params['id']))
             echo "<h6>Error on Delete.</h6>";
 
-        $cities = $city->getCities();
+        $cities = $city->getAll();
         if($cities != '') {
             paintRow($cities);
             $datos = ob_get_clean();

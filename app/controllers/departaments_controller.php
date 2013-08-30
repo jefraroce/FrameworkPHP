@@ -25,7 +25,7 @@ class DepartamentsController extends ApplicationController implements IControlle
         
         $departament = new Departament();
                
-        $departaments = $departament->getDepartaments();
+        $departaments = $departament->getAll();
         if($departaments != '') {
             include Route::getViewPath("departaments", "departaments");//'app/views/departaments/departaments.php';
             $datos = ob_get_clean();
@@ -47,7 +47,7 @@ class DepartamentsController extends ApplicationController implements IControlle
         $tmp = new Country();       
         
         ob_start(); 
-        $countries = $tmp->getCountries();
+        $countries = $tmp->getAll();
         include Route::getViewPath("departaments", "new");//'app/views/departaments/new.php';
         $datos = ob_get_clean();
         $html = $datos;  
@@ -66,7 +66,7 @@ class DepartamentsController extends ApplicationController implements IControlle
         $tmp = new Country();        
         
         ob_start(); 
-        $countries = $tmp->getCountries();
+        $countries = $tmp->getAll();
         include Route::getViewPath("departaments", "edit");//'app/views/departaments/edit.php';
         $datos = ob_get_clean();
         $html = $datos;  
@@ -89,10 +89,10 @@ class DepartamentsController extends ApplicationController implements IControlle
         
         $departament = new Departament();
         
-        if(!$departament->insert($params['code'], $params['name'], $params['country_id']))
+        if(!$departament->insert($params['departament']))
             echo "<h6>Error on Insert.</h6>";
                
-        $departaments = $departament->getDepartaments();
+        $departaments = $departament->getAll();
         if($departaments != '') {
             include Route::getViewPath("departaments", "departaments");//'app/views/departaments/departaments.php';
             $datos = ob_get_clean();
@@ -118,10 +118,10 @@ class DepartamentsController extends ApplicationController implements IControlle
         
         $departament = new Departament();
         
-        if(!$departament->update($params['id'], $params['code'], $params['name'], $params['country_id']))
+        if(!$departament->update($params['id'], $params['departament']))
             echo "<h6>Error on Update.</h6>";
                
-        $departaments = $departament->getDepartaments();
+        $departaments = $departament->getAll();
         if($departaments != '') {
             include Route::getViewPath("departaments", "departaments");//'app/views/departaments/departaments.php';
             $datos = ob_get_clean();
@@ -147,7 +147,7 @@ class DepartamentsController extends ApplicationController implements IControlle
         if(!$departament->delete($params['id']))
             echo "<h6>Error on Delete.</h6>";
 
-        $departaments = $departament->getDepartaments();
+        $departaments = $departament->getAll();
         if($departaments != '') {
             paintRow($departaments);
             $datos = ob_get_clean();

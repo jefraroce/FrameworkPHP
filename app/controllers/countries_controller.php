@@ -24,7 +24,7 @@ class CountriesController extends ApplicationController implements IController {
         
         $country = new Country();
                
-        $countries = $country->getCountries();
+        $countries = $country->getAll();
         if($countries != '') {
             include Route::getViewPath("countries", "countries");//'app/views/countries/countries.php';
             $datos = ob_get_clean();
@@ -83,10 +83,11 @@ class CountriesController extends ApplicationController implements IController {
         
         $country = new Country();
         
-        if(!$country->insert($params['code'], $params['name']))
+        //if(!$country->insert($params['code'], $params['name']))
+        if(!$country->insert($params['country']))
             echo "<h6>Error on Insert.</h6>";
                
-        $countries = $country->getCountries();
+        $countries = $country->getAll();
         if($countries != '') {
             include Route::getViewPath("countries", "countries");//'app/views/countries/countries.php';
             $datos = ob_get_clean();
@@ -112,10 +113,10 @@ class CountriesController extends ApplicationController implements IController {
         
         $country = new Country();
         
-        if(!$country->update($params['id'], $params['code'], $params['name']))
+        if(!$country->update($params['country']['id'], $params['country']))
             echo "<h6>Error on Update.</h6>";
                
-        $countries = $country->getCountries();
+        $countries = $country->getAll();
         if($countries != '') {
             include Route::getViewPath("countries", "countries");//'app/views/countries/countries.php';
             $datos = ob_get_clean();
@@ -141,7 +142,7 @@ class CountriesController extends ApplicationController implements IController {
         if(!$country->delete($params['id']))
             echo "<h6>Error on Delete.</h6>";
 
-        $countries = $country->getCountries();
+        $countries = $country->getAll();
         if($countries != '') {
             paintRow($countries);
             $datos = ob_get_clean();

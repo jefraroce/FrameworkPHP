@@ -22,10 +22,8 @@ class CitiesController extends ApplicationController implements IController {
         ob_start();     
         
         $pagina = $this->loadTemplate("Listing Cities");
-        
-        $city = new City();
                
-        $cities = $city->getAll();
+        $cities = City::getAll();
         if($cities != '') {
             include Route::getViewPath("cities", "cities");//'app/views/cities/cities.php';
             $datos = ob_get_clean();

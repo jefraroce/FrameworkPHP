@@ -22,10 +22,8 @@ class DepartamentsController extends ApplicationController implements IControlle
         ob_start();     
         
         $pagina = $this->loadTemplate("Listing Departaments");
-        
-        $departament = new Departament();
-               
-        $departaments = $departament->getAll();
+                       
+        $departaments = Departament::getAll();
         if($departaments != '') {
             include Route::getViewPath("departaments", "departaments");//'app/views/departaments/departaments.php';
             $datos = ob_get_clean();
@@ -42,12 +40,11 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     function create () {
         
-        $pagina = $this->loadTemplate("New Departament");
-        
-        $tmp = new Country();       
+        $pagina = $this->loadTemplate("New Departament");     
         
         ob_start(); 
-        $countries = $tmp->getAll();
+        //Country::initcialize();
+        $countries = Country::getAll();
         include Route::getViewPath("departaments", "new");//'app/views/departaments/new.php';
         $datos = ob_get_clean();
         $html = $datos;  
@@ -62,11 +59,10 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     function edit ($params) {
         
-        $pagina = $this->loadTemplate("Edit Departament");
-        $tmp = new Country();        
+        $pagina = $this->loadTemplate("Edit Departament"); 
         
         ob_start(); 
-        $countries = $tmp->getAll();
+        $countries = Country::getAll();
         include Route::getViewPath("departaments", "edit");//'app/views/departaments/edit.php';
         $datos = ob_get_clean();
         $html = $datos;  
@@ -87,12 +83,10 @@ class DepartamentsController extends ApplicationController implements IControlle
         
         $pagina = $this->loadTemplate("Listing Departaments");
         
-        $departament = new Departament();
-        
-        if(!$departament->insert($params['departament']))
+        if(!Departament::insert($params['departament']))
             echo "<h6>Error on Insert.</h6>";
                
-        $departaments = $departament->getAll();
+        $departaments = Departament::getAll();
         if($departaments != '') {
             include Route::getViewPath("departaments", "departaments");//'app/views/departaments/departaments.php';
             $datos = ob_get_clean();
@@ -116,12 +110,10 @@ class DepartamentsController extends ApplicationController implements IControlle
         
         $pagina = $this->loadTemplate("Listing Departaments");
         
-        $departament = new Departament();
-        
-        if(!$departament->update($params['id'], $params['departament']))
+        if(!Departament::update($params['id'], $params['departament']))
             echo "<h6>Error on Update.</h6>";
                
-        $departaments = $departament->getAll();
+        $departaments = Departament::getAll();
         if($departaments != '') {
             include Route::getViewPath("departaments", "departaments");//'app/views/departaments/departaments.php';
             $datos = ob_get_clean();
@@ -142,12 +134,10 @@ class DepartamentsController extends ApplicationController implements IControlle
         
         ob_start();
         
-        $departament = new Departament();
-        
-        if(!$departament->delete($params['id']))
+        if(!Departament::delete($params['id']))
             echo "<h6>Error on Delete.</h6>";
 
-        $departaments = $departament->getAll();
+        $departaments = Departament::getAll();
         if($departaments != '') {
             paintRow($departaments);
             $datos = ob_get_clean();
@@ -165,9 +155,7 @@ class DepartamentsController extends ApplicationController implements IControlle
         
         ob_start();
         
-        $departament = new Departament();
-        
-        $departaments = $departament->search($params['key'], $params['value']);
+        $departaments = Departament::search($params['key'], $params['value']);
             
         if($departaments != '') {
             paintRow($departaments);
@@ -188,9 +176,7 @@ class DepartamentsController extends ApplicationController implements IControlle
         
         ob_start();
         
-        $departament = new Departament();
-        
-        $departaments = $departament->show($params['id']);
+        $departaments = Departament::show($params['id']);
             
         if($departaments != '') {
             include Route::getViewPath("departaments", "show");//'app/views/departaments/show.php';

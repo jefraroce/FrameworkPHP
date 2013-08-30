@@ -6,9 +6,13 @@
 require_once 'config/db.php';
 
 class Country extends Db {
-        
-    function __construct() {
-        parent::__construct("countries");
-    }
+    
+    protected static $table_name = "countries";
+    
+    protected static $table_schema = array(
+     'id' => 0,
+     'code' => '',
+     'name' => ''
+    );
     
 }

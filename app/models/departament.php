@@ -7,9 +7,13 @@ require_once 'config/db.php';
 
 class Departament extends Db {
     
-    function __construct() {
-        parent::__construct("departaments");
-    }
+    protected static $table_name = "departaments";
+    
+    protected static $table_schema = array(
+     'id' => 0,
+     'code' => '',
+     'name' => '',
+     'country_id' => ''
+    );
     
 }
-?>

@@ -12,27 +12,28 @@ require_once Route::getHelperPath("departaments");
 
 class DepartamentsController extends ApplicationController implements IController {
     
-    function __construct() {}
+    /**
+     * Default Layout
+     * @var String  
+     */
+    protected $layout;
+            
+    /**
+     * Create a new instance of DepartamentsController
+     * @param String $layout Default Layout
+     */
+    function __construct($layout = 'page') {
+        $this->layout = Route::getLayoutPath($layout);
+    }
     
     /**
      * Show all Departaments
      */
     function index () {
-         //obtiene  los registros de la base de datos
-        ob_start();     
-        
-        $pagina = $this->loadTemplate("Listing Departaments");
                        
         $departaments = Departament::getAll();
-        if($departaments != '') {
-            include Route::getViewPath("departaments", "departaments");//'app/views/departaments/departaments.php';
-            $datos = ob_get_clean();
-            $html = $datos;                
-            
-        }        				
-		
-	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
-	$this->viewPage($pagina);
+        
+        $this->renderView("departaments", '', $this->layout, "Listing Departaments", $departaments);
     }
     
     /**
@@ -40,18 +41,10 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     function create () {
         
-        $pagina = $this->loadTemplate("New Departament");     
+        $params = array("countries" => Country::getAll());
         
-        ob_start(); 
+        $this->renderView("departaments", "new", $this->layout, "New Departament", null, $params);
         
-        $countries = Country::getAll();
-        include Route::getViewPath("departaments", "new");//'app/views/departaments/new.php';
-        $datos = ob_get_clean();
-        $html = $datos;  
-        
-	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
-        
-	$this->viewPage($pagina);
     }
     
     /**
@@ -59,17 +52,10 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     function edit ($params) {
         
-        $pagina = $this->loadTemplate("Edit Departament"); 
+        $params["countries"] = Country::getAll();
         
-        ob_start(); 
-        $countries = Country::getAll();
-        include Route::getViewPath("departaments", "edit");//'app/views/departaments/edit.php';
-        $datos = ob_get_clean();
-        $html = $datos;  
+        $this->renderView("departaments", "edit", $this->layout, "Edit Departament", null, $params);
         
-	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
-        
-	$this->viewPage($pagina);
     }
     
     /**
@@ -78,24 +64,13 @@ class DepartamentsController extends ApplicationController implements IControlle
      * @param type $name
      */
     function insert ($params) {
-        //obtiene  los registros de la base de datos
-        ob_start();     
-        
-        $pagina = $this->loadTemplate("Listing Departaments");
         
         if(!Departament::insert($params['departament']))
             echo "<h6>Error on Insert.</h6>";
                
         $departaments = Departament::getAll();
-        if($departaments != '') {
-            include Route::getViewPath("departaments", "departaments");//'app/views/departaments/departaments.php';
-            $datos = ob_get_clean();
-            $html = $datos;                
-            
-        }        				
-		
-	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
-	$this->viewPage($pagina);
+        
+        $this->renderView("departaments", '', $this->layout, "Listing Departaments", $departaments, $params);
         
     }
     
@@ -105,24 +80,13 @@ class DepartamentsController extends ApplicationController implements IControlle
      * @param type $name
      */
     function update ($params) {
-        //obtiene  los registros de la base de datos
-        ob_start();     
-        
-        $pagina = $this->loadTemplate("Listing Departaments");
         
         if(!Departament::update($params['id'], $params['departament']))
             echo "<h6>Error on Update.</h6>";
                
         $departaments = Departament::getAll();
-        if($departaments != '') {
-            include Route::getViewPath("departaments", "departaments");//'app/views/departaments/departaments.php';
-            $datos = ob_get_clean();
-            $html = $datos;                
-            
-        }        				
-		
-	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
-	$this->viewPage($pagina);
+        
+        $this->renderView("departaments", '', $this->layout, "Listing Departaments", $departaments, $params);
 
     }
     
@@ -132,17 +96,19 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     function delete ($params) {
         
-        ob_start();
-        
         if(!Departament::delete($params['id']))
             echo "<h6>Error on Delete.</h6>";
 
         $departaments = Departament::getAll();
-        if($departaments != '') {
-            paintRow($departaments);
-            $datos = ob_get_clean();
-            $html = $datos;                
-            $this->viewPage($html);
+        
+        if($departaments->count() > 0) {
+            
+            ob_start();
+            paintRow($departaments);              
+            $this->viewPage(ob_get_clean());
+            
+        } else {
+            echo "<h6>No departaments found.</h6>";
         }
         
     }
@@ -153,15 +119,16 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     function search ($params) {
         
-        ob_start();
-        
         $departaments = Departament::search($params['key'], $params['value']);
             
-        if($departaments != '') {
-            paintRow($departaments);
-            $datos = ob_get_clean();
-            $html = $datos;                
-            $this->viewPage($html);
+        if($departaments->count() > 0) {
+            
+            ob_start();
+            paintRow($departaments);         
+            $this->viewPage(ob_get_clean());
+            
+        } else {
+            echo "<h6>No departaments found.</h6>";
         }
         
     }
@@ -172,20 +139,9 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     public function show($params) {
         
-        $pagina = $this->loadTemplate("Show Departament");
-        
-        ob_start();
-        
         $departaments = Departament::show($params['id']);
             
-        if($departaments != '') {
-            include Route::getViewPath("departaments", "show");//'app/views/departaments/show.php';
-            $datos = ob_get_clean();
-            $html = $datos;     
-        }
-        	
-	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
-	$this->viewPage($pagina);
+        $this->renderView("departaments", "show", $this->layout, "Show Departament", $departaments, $params);
         
     }
 

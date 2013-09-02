@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author Jeisson Rosas
+ */
 
 class Route {
 
@@ -8,13 +11,13 @@ class Route {
     const PATH_SEPARATOR = "/";
     
     /**
-     * 
+     * Separator for url's
      */
     const URL_SEPARATOR = "/";
     
     /**
      * Return route absolute to Root Path
-     * @return String
+     * @return String Path
      */
     public static function getRootPath() {
         return dirname( dirname(  __FILE__  ) ).self::PATH_SEPARATOR;
@@ -22,7 +25,7 @@ class Route {
     
     /**
      * Return route absolute to App Path
-     * @return String
+     * @return String Path
      */
     public static function getAppPath() {
         return self::getRootPath()."app".self::PATH_SEPARATOR;
@@ -31,7 +34,7 @@ class Route {
     /**
      * Return route absolute to a Controller or Controllers Path
      * @param String $controller - name of the controller
-     * @return String
+     * @return String Path
      */
     public static function getControllerPath($controller = "") {
         if($controller == "") {
@@ -47,7 +50,7 @@ class Route {
      * If the param view is empty return route absolute to the directory views of the controller. Example views/users
      * @param String $controller - name of the controller
      * @param String $view - name of the view
-     * @return String
+     * @return String Path
      */
     public static function getViewPath($controller = "", $view = "") {
         if($controller == "") {
@@ -62,7 +65,7 @@ class Route {
     /**
      * Return route absolute to a Model
      * @param String $model - name of the model
-     * @return String
+     * @return String Path
      */
     public static function getModelPath($model = "") {
         if($model == "") {
@@ -75,7 +78,7 @@ class Route {
     /**
      * Return route absolute to a Helper
      * @param String $helper - name of the helper
-     * @return String
+     * @return String Path
      */
     public static function getHelperPath($helper = "") {
         if($helper == "") {

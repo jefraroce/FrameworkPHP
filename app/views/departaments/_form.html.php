@@ -9,7 +9,7 @@
     <label for="name">NAME</label>&nbsp;<input type="text" id="name" name="departament[name]" size="50" placeholder="name" value="<?php echo (isset($params['name']) ? $params['name'] : "" ); ?>" class="required"  />
     <br/><br/>
     <label for="name">COUNTRY</label>&nbsp;<select id="country_id" name="departament[country_id]">
-    <?php foreach ($countries as $country) {
+    <?php foreach ($params["countries"] as $country) {
         $sel = "";
         if(isset($params['country_id']) && $params['country_id'] == $country['code'])
             $sel = "selected";

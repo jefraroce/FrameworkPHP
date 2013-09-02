@@ -11,27 +11,29 @@ require_once Route::getHelperPath('countries');
 
 class CountriesController extends ApplicationController implements IController {
     
-    function __construct() {}
+    /**
+     * Default Layout
+     * @var String  
+     */
+    protected $layout;
+            
+    /**
+     * Create a new instance of CountriesController
+     * @param String $layout - Default Layout
+     */
+    function __construct($layout = 'page') {
+        $this->layout = Route::getLayoutPath($layout);
+    }
     
     /**
      * Show all Countries
      */
-    function index () {
-         //obtiene  los registros de la base de datos
-        ob_start();     
+    function index () { 
         
-        $pagina = $this->loadTemplate("Listing Countries");
-               
         $countries = Country::getAll();
-        if($countries != '') {
-            include Route::getViewPath("countries", "countries");//'app/views/countries/countries.php';
-            $datos = ob_get_clean();
-            $html = $datos;                
-            
-        }        				
-		
-	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
-	$this->viewPage($pagina);
+        
+        $this->renderView("countries", $this->defaultView, $this->layout, "Listing Countries", $countries);
+        
     }
     
     /**
@@ -39,148 +41,102 @@ class CountriesController extends ApplicationController implements IController {
      */
     function create () {
         
-        $pagina = $this->loadTemplate("New Country");
-        
-        ob_start(); 
-        include Route::getViewPath("countries", "new");//'app/views/countries/new.php';
-        $datos = ob_get_clean();
-        $html = $datos;  
-        
-	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
-        
-	$this->viewPage($pagina);
+        $this->renderView("countries", "new", $this->layout, "New Country");
+     
     }
     
     /**
      * Edit a Country
+     * @param array $params
      */
     function edit ($params) {
         
-        $pagina = $this->loadTemplate("Edit Country");
+        $this->renderView("countries", "edit", $this->layout, "Edit Country", null, $params);
         
-        ob_start(); 
-        include Route::getViewPath("countries", "edit");//'app/views/countries/edit.php';
-        $datos = ob_get_clean();
-        $html = $datos;  
-        
-	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
-        
-	$this->viewPage($pagina);
     }
     
     /**
      * Insert a new Country
-     * @param type $code
-     * @param type $name
+     * @param array $params
      */
     function insert ($params) {
-        //obtiene  los registros de la base de datos
-        ob_start();     
-        
-        $pagina = $this->loadTemplate("Listing Countries");
         
         if(!Country::insert($params['country']))
             echo "<h6>Error on Insert.</h6>";
                
         $countries = Country::getAll();
-        if($countries != '') {
-            include Route::getViewPath("countries", "countries");//'app/views/countries/countries.php';
-            $datos = ob_get_clean();
-            $html = $datos;                
-            
-        }        				
-		
-	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
-	$this->viewPage($pagina);
+        
+        $this->renderView("countries", $this->defaultView, $this->layout, "Listing Countries", $countries);
         
     }
     
     /**
      * Insert a new Country
-     * @param type $code
-     * @param type $name
+     * @param array $params Parameters
      */
     function update ($params) {
-        //obtiene  los registros de la base de datos
-        ob_start();     
-        
-        $pagina = $this->loadTemplate("Listing Countries");
         
         if(!Country::update($params['country']['id'], $params['country']))
             echo "<h6>Error on Update.</h6>";
                
         $countries = Country::getAll();
-        if($countries != '') {
-            include Route::getViewPath("countries", "countries");//'app/views/countries/countries.php';
-            $datos = ob_get_clean();
-            $html = $datos;                
-            
-        }        				
-		
-	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
-	$this->viewPage($pagina);
+        
+        $this->renderView("countries", $this->defaultView, $this->layout, "Listing Countries", $countries);
 
     }
     
     /**
      * 
-     * @param type $id
+     * @param array $params Parameters
      */
     function delete ($params) {
-        
-        ob_start();
         
         if(!Country::delete($params['id']))
             echo "<h6>Error on Delete.</h6>";
 
         $countries = Country::getAll();
-        if($countries != '') {
-            paintRow($countries);
-            $datos = ob_get_clean();
-            $html = $datos;                
-            $this->viewPage($html);
+        
+        if($countries->count() > 0) {
+            
+            ob_start();
+            paintRow($countries);        
+            $this->viewPage(ob_get_clean());
+            
+        } else {
+            echo "<h6>No countries found.</h6>";
         }
         
     }
     
     /**
      * 
-     * @param type $params
+     * @param array $params
      */
     function search ($params) {
         
         $countries = Country::search($params['key'], $params['value']);
+        
+        if($countries->count() > 0) {
             
-        if($countries != '') {
             ob_start();
             paintRow($countries);
-            $datos = ob_get_clean();
-            $html = $datos;                
-            $this->viewPage($html);
-        } 
+            $this->viewPage(ob_get_clean());
+            
+        } else {
+            echo "<h6>No countries found.</h6>";
+        }
         
     }
 
     /**
      * Show info about specific Country
-     * @param type $params
+     * @param array $params
      */
     public function show($params) {
         
-        $pagina = $this->loadTemplate("Show Country");
-        
-        ob_start();
-        
         $countries = Country::show($params['id']);
-            
-        if($countries != '') {
-            include Route::getViewPath("countries", "show");//'app/views/countries/show.php';
-            $datos = ob_get_clean();
-            $html = $datos;     
-        }
-        	
-	$pagina = $this->replaceContent('/\#CONTENIDO\#/ms' , $html, $pagina);
-	$this->viewPage($pagina);
+        
+        $this->renderView("countries", "show", $this->layout, "Show Country", $countries);
         
     }
 

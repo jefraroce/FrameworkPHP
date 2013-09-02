@@ -1,5 +1,5 @@
 <h4>Show City</h4>
-<?php foreach ($cities as $tmp) { ?>
+<?php foreach ($collection as $tmp) { ?>
 <label>CODE: </label>&nbsp;<?php echo $tmp['code']; ?>
 <br/>
 <label>NAME: </label>&nbsp;<?php echo $tmp['name']; ?>

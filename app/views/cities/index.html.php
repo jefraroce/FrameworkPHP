@@ -15,7 +15,7 @@
         </tr>
         </thead>
         <tbody id="cities-list">
-            <?php paintRow($cities); ?>
+            <?php paintRow($collection); ?>
         </tbody>
     </table>
 </div>

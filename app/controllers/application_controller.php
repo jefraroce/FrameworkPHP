@@ -4,15 +4,20 @@ require_once 'config/routes.php';
 
 class ApplicationController {
     
+    protected $defaultView = "index";
+
     /**
      * Load and return a Template
      * @param String $title - Title of the page
      * @param String $script - Code script will be add to the page
      * @return page
      */
-    protected function loadTemplate($title = 'Test Jeisson', $header = '') {
+    protected function loadTemplate($title = 'Test Jeisson', $layout = '', $header = '') {
         
-        $pagina = $this->loadPage(Route::getLayoutPath('page'));     
+        if(!empty($layout))
+            $pagina = $this->loadPage($layout);    
+        else
+            $pagina = $this->loadPage($this->layout);
             
         $header = $this->loadPage(Route::getLayoutPath("header"));            
         $pagina = $this->replaceContent('/\#HEADER\#/ms', $header, $pagina);            
@@ -24,13 +29,13 @@ class ApplicationController {
         return $pagina;
     }
 		
-	/* METODO QUE CARGA UNA PAGINA DE LA SECCION VIEW Y LA MANTIENE EN MEMORIA
-		INPUT
-		$page | direccion de la pagina 
-		OUTPUT
-		STRING | devuelve un string con el codigo html cargado
-	*/	
-    protected function loadPage($page) {
+    /**
+     * Load a page in the buffer.
+     * @param String $page Path or Url to page
+     * @param mixed $params Additional parameters
+     * @return String - Buffer with the content of one page
+     */
+    protected function loadPage($page, $collection = null, $params = null) {
         
         ob_start();
         include $page;
@@ -60,6 +65,35 @@ class ApplicationController {
      protected function viewPage($html) {
         
         echo $html;
+        
+    }
+    
+    /**
+     * 
+     * @param type $controller
+     * @param type $view
+     * @param type $layout
+     * @param type $title
+     * @param type $collection
+     * @param type $params
+     */
+    protected function renderView($controller, $view = '', $layout = '', $title = 'Test FrameworkPHP', $collection = null, $params = array()) {
+        
+        $view = (empty($view) ? $this->defaultView : $view);
+        
+        $content = $this->loadPage(Route::getViewPath($controller, $view), $collection, $params);
+        
+        if(!empty($layout)) {
+            
+            $pagina = $this->replaceContent('/\#CONTENIDO\#/ms', $content, $this->loadTemplate($title, $layout));
+            
+        } else {
+            
+            $pagina = $content;
+            
+        }
+        
+	$this->viewPage($pagina);
         
     }
 }

@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/Test_php/config/routes.php</file>
-            <file>file:/var/www/Test_php/app/views/countries/_form.html.php</file>
-            <file>file:/var/www/Test_php/app/models/country.php</file>
+            <file>file:/var/www/Test_php/index.php</file>
+            <file>file:/var/www/Test_php/app/controllers/cities_controller.php</file>
             <file>file:/var/www/Test_php/config/db.php</file>
+            <file>file:/var/www/Test_php/app/controllers/i_controller.php</file>
             <file>file:/var/www/Test_php/app/controllers/countries_controller.php</file>
-            <file>file:/var/www/Test_php/app/views/layouts/page.html.php</file>
-            <file>file:/var/www/Test_php/app/models/city.php</file>
+            <file>file:/var/www/Test_php/app/controllers/application_controller.php</file>
+            <file>file:/var/www/Test_php/app/controllers/departaments_controller.php</file>
         </group>
     </open-files>
 </project-private>

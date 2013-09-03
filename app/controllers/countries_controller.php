@@ -23,16 +23,28 @@ class CountriesController extends ApplicationController implements IController {
      */
     function __construct($layout = 'page') {
         $this->layout = Route::getLayoutPath($layout);
+        session_start();
     }
     
     /**
      * Show all Countries
      */
-    function index () { 
+    function index ($params) { 
         
         $countries = Country::getAll();
         
-        $this->renderView("countries", $this->defaultView, $this->layout, "Listing Countries", $countries);
+        if(isset($params['format']) && $params['format'] != "html" ) {
+            if($params['format'] == "json") {
+                header( 'Content-type: application/json' );
+            } else if ($params['format'] == "xml") {
+                header( 'Content-type: application/xml' );                
+            } else if ($params['format'] == "js") {
+                header( 'Content-type: application/javascript' );
+            }
+            $this->renderView("countries", "index", 'none', "Listing Countries", $countries, $params);
+        } else {
+            $this->renderView("countries", $this->defaultView, $this->layout, "Listing Countries", $countries);
+        }
         
     }
     
@@ -61,8 +73,11 @@ class CountriesController extends ApplicationController implements IController {
      */
     function insert ($params) {
         
-        if(!Country::insert($params['country']))
-            echo "<h6>Error on Insert.</h6>";
+        if(!Country::insert($params['country'])) {
+            $_SESSION[ 'flash' ][ 'error' ] = "Could not be Inserted.";
+        } else {
+            $_SESSION[ 'flash' ][ 'notice' ] = "Country successfuly inserted!";
+        }
                
         $countries = Country::getAll();
         
@@ -76,8 +91,11 @@ class CountriesController extends ApplicationController implements IController {
      */
     function update ($params) {
         
-        if(!Country::update($params['country']['id'], $params['country']))
-            echo "<h6>Error on Update.</h6>";
+        if(!Country::update($params['country']['id'], $params['country'])) {
+            $_SESSION[ 'flash' ][ 'error' ] = "Could not be Updated.";
+        } else {
+            $_SESSION[ 'flash' ][ 'notice' ] = "Country successfuly updated!";
+        }
                
         $countries = Country::getAll();
         
@@ -91,8 +109,11 @@ class CountriesController extends ApplicationController implements IController {
      */
     function delete ($params) {
         
-        if(!Country::delete($params['id']))
-            echo "<h6>Error on Delete.</h6>";
+        if(!Country::delete($params['id'])) {
+            $_SESSION[ 'flash' ][ 'error' ] = "Could not be Deleted.";
+        } else {
+            $_SESSION[ 'flash' ][ 'notice' ] = "Country successfuly deleted!";
+        }
         
         Route::redirectTo("countries");
         
@@ -108,10 +129,16 @@ class CountriesController extends ApplicationController implements IController {
         
         if($countries->count() > 0) {
             
-            $this->renderView("countries", "_countries", 'none', "Listing Countries", $countries);
+            if($this->isAjax()) {
+                $this->renderView("countries", "_countries", 'none', "Listing Countries", $countries);
+            } else {
+                $this->renderView("countries", $this->defaultView, $this->layout, "Listing Countries", $countries);
+            }
             
         } else {
-            echo "<h6>No countries found.</h6>";
+            
+            $_SESSION[ 'flash' ][ 'error' ] = "No countries found.";
+            
         }
         
     }
@@ -124,7 +151,18 @@ class CountriesController extends ApplicationController implements IController {
         
         $countries = Country::show($params['id']);
         
-        $this->renderView("countries", "show", $this->layout, "Show Country", $countries);
+        if(isset($params['format']) && $params['format'] != "html" ) {
+            if($params['format'] == "json") {
+                header( 'Content-type: application/json' );
+            } else if ($params['format'] == "xml") {
+                header( 'Content-type: application/xml' );                
+            } else if ($params['format'] == "js") {
+                header( 'Content-type: application/javascript' );
+            }
+            $this->renderView("countries", "index", 'none', "Listing Countries", $countries, $params);
+        } else {
+            $this->renderView("countries", "show", $this->layout, "Show Country", $countries);
+        }
         
     }
 

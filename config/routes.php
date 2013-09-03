@@ -52,13 +52,15 @@ class Route {
      * @param String $view - name of the view
      * @return String Path
      */
-    public static function getViewPath($controller = "", $view = "") {
-        if($controller == "") {
+    public static function getViewPath($controller = "", $view = "", $format = "html") {
+        if(empty($controller) && empty($view)) {
             return self::getAppPath()."views".self::PATH_SEPARATOR;
-        } else if ($view == "") {
+        } else if (!empty($controller) && empty($view)) {
             return self::getAppPath()."views".self::PATH_SEPARATOR.$controller.self::PATH_SEPARATOR;
+        } else if (empty($controller) && !empty($view)) {
+            return self::getAppPath()."views".self::PATH_SEPARATOR.$view.".".$format.".php";
         } else {
-            return self::getAppPath()."views".self::PATH_SEPARATOR.$controller.self::PATH_SEPARATOR.$view.".html.php";
+            return self::getAppPath()."views".self::PATH_SEPARATOR.$controller.self::PATH_SEPARATOR.$view.".".$format.".php";
         }
     }
     
@@ -156,17 +158,19 @@ class Route {
     }
     
     /**
-     * Return URL based on the "controller", "action" and "params"
-     * @param String $controller - Controller
-     * @param String $action - Action
-     * @param String $params - Parameters
+     * Return URL based on the "controller", "action", "format" and "params"
+     * @param String $controller Name controller
+     * @param String $action Name action
+     * @param String $format Format to response.
+     * @param String $params Parameters
      * @return String
      **/
-    public static function getUrlFor( $controller, $action = '', $params = array() ) {
+    public static function getUrlFor( $controller, $action = '', $params = array(), $format = 'html' ) {
       $url = ( self::getCurrentUrl( true ).self::PATH_SEPARATOR );
       
       if ( !empty( $controller ) ) { $url .= '?controller=' . $controller; }
       if ( !empty( $action ) ) { $url .= ( ( strpos( $url, '?' ) === false ) ? '?' : '&' ) . 'action=' . $action; }
+      if ( !empty( $format ) ) { $url .= ( ( strpos( $url, '?' ) === false ) ? '?' : '&' ) . 'format=' . $format; }
       if ( $params != null ) { 
           foreach ($params as $key=>$value) {
             $url .= ( ( strpos( $url, '?' ) === false ) ? '?' : '&' ) . $key."=".$value; 

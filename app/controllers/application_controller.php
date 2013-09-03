@@ -81,7 +81,9 @@ class ApplicationController {
         
         $view = (empty($view) ? $this->defaultView : $view);
         
-        $content = $this->loadPage(Route::getViewPath($controller, $view), $collection, $params);
+        $format = isset($params['format']) ? $params['format'] : "html";
+        
+        $content = $this->loadPage(Route::getViewPath($controller, $view, $format), $collection, $params);
         
         if( $layout != 'none') {
             
@@ -94,6 +96,20 @@ class ApplicationController {
         }
         
 	$this->viewPage($pagina);
+        
+    }
+    
+    /**
+     * Verify if a request is ajax.
+     * @return boolean True if is a request ajax. False for otherwise.
+     */
+    protected function isAjax() {
+        
+        if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            return true;        
+        } else {
+            return false;
+        }
         
     }
 }

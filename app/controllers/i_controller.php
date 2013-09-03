@@ -5,7 +5,7 @@
 
 interface IController {
        
-    function index();
+    function index($params);
 
     function create();
     

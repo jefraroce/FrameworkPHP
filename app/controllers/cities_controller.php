@@ -24,16 +24,28 @@ class CitiesController extends ApplicationController implements IController {
      */
     function __construct($layout = 'page') {
         $this->layout = Route::getLayoutPath($layout);
+        session_start();
     }
     
     /**
      * Show all Cities
      */
-    function index () {
+    function index ($params) {
                
         $cities = City::getAll();
         
-        $this->renderView("cities", '', $this->layout, "Listing cities", $cities);
+        if(isset($params['format']) && $params['format'] != "html" ) {
+            if($params['format'] == "json") {
+                header( 'Content-type: application/json' );
+            } else if ($params['format'] == "xml") {
+                header( 'Content-type: application/xml' );
+            } else if ($params['format'] == "js") {
+               header( 'Content-type: application/javascript' );
+            }
+            $this->renderView("cities", "index", 'none', "Listing Cities", $cities, $params);
+        } else {
+            $this->renderView("cities", '', $this->layout, "Listing cities", $cities);
+        }
         
     }
     
@@ -66,8 +78,11 @@ class CitiesController extends ApplicationController implements IController {
      */
     function insert ($params) {
         
-        if(!City::insert($params['city']))
-            echo "<h6>Error on Insert.</h6>";
+        if(!City::insert($params['city'])) {
+            $_SESSION[ 'flash' ][ 'error' ] = "Could not be Insert.";
+        } else {
+            $_SESSION[ 'flash' ][ 'notice' ] = "City successfuly inserted!";
+        }
                
         $cities = City::getAll();
         
@@ -82,8 +97,11 @@ class CitiesController extends ApplicationController implements IController {
      */
     function update ($params) {
         
-        if(!City::update($params['city']['id'], $params['city']))
-            echo "<h6>Error on Update.</h6>";
+        if(!City::update($params['city']['id'], $params['city'])) {
+            $_SESSION[ 'flash' ][ 'error' ] = "Could not be Update.";
+        } else {
+            $_SESSION[ 'flash' ][ 'notice' ] = "City successfuly updated!";
+        }
                
         $cities = City::getAll();
         
@@ -95,10 +113,13 @@ class CitiesController extends ApplicationController implements IController {
      * Delete a city by your id
      * @param array $id
      */
-    function delete ($params) {       
+    function delete ($params) {  
         
-        if(!City::delete($params['id']))
-            echo "<h6>Error on Delete.</h6>";
+        if(!City::delete($params['id'])) {
+            $_SESSION[ 'flash' ][ 'error' ] = "Could not be Delete.";
+        } else {
+            $_SESSION[ 'flash' ][ 'notice' ] = "City successfuly deleted!";
+        }
 
         Route::redirectTo("cities");
         
@@ -114,10 +135,16 @@ class CitiesController extends ApplicationController implements IController {
             
         if($cities->count() > 0) {
             
-            $this->renderView("cities", "_cities", 'none', "Listing Cities", $cities);
+            if($this->isAjax()) {
+                $this->renderView("cities", "_cities", 'none', "Listing Cities", $cities);
+            } else {
+                $this->renderView("cities", $this->defaultView, $this->layout, "Listing Cities", $cities);
+            }
             
         } else {
-            echo "<h6>No cities found.</h6>";
+            
+            $_SESSION[ 'flash' ][ 'error' ] = "No cities found.";
+            
         }
         
     }
@@ -130,7 +157,18 @@ class CitiesController extends ApplicationController implements IController {
         
         $cities = City::show($params['id']);
             
-        $this->renderView("cities", "show", $this->layout, "Show City", $cities, $params);
+        if(isset($params['format']) && $params['format'] != "html" ) {
+            if($params['format'] == "json") {
+                header( 'Content-type: application/json' );
+            } else if ($params['format'] == "xml") {
+                header( 'Content-type: application/xml' );
+            } else if ($params['format'] == "js") {
+               header( 'Content-type: application/javascript' );
+            }
+            $this->renderView("cities", "index", 'none', "Listing Cities", $cities, $params);
+        } else {
+            $this->renderView("cities", "show", $this->layout, "Show City", $cities, $params);
+        }
         
     }
 

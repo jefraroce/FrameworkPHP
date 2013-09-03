@@ -24,16 +24,29 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     function __construct($layout = 'page') {
         $this->layout = Route::getLayoutPath($layout);
+        session_start();
     }
     
     /**
      * Show all Departaments
      */
-    function index () {
+    function index ($params) {
                        
         $departaments = Departament::getAll();
         
-        $this->renderView("departaments", '', $this->layout, "Listing Departaments", $departaments);
+        if(isset($params['format']) && $params['format'] != "html" ) {
+            if($params['format'] == "json") {
+                header( 'Content-type: application/json' );
+            } else if ($params['format'] == "xml") {
+                header( 'Content-type: application/xml' );
+            } else if ($params['format'] == "js") {
+               header( 'Content-type: application/javascript' );
+            }
+            $this->renderView("departaments", "index", 'none', "Listing Departaments", $departaments, $params);
+        } else {
+            $this->renderView("departaments", '', $this->layout, "Listing Departaments", $departaments);
+        }
+        
     }
     
     /**
@@ -65,8 +78,11 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     function insert ($params) {
         
-        if(!Departament::insert($params['departament']))
-            echo "<h6>Error on Insert.</h6>";
+        if(!Departament::insert($params['departament'])) {
+            $_SESSION[ 'flash' ][ 'error' ] = "Could not be Inserted.";
+        } else {
+            $_SESSION[ 'flash' ][ 'notice' ] = "Departament successfuly inserted!";
+        }
                
         $departaments = Departament::getAll();
         
@@ -81,8 +97,11 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     function update ($params) {
         
-        if(!Departament::update($params['id'], $params['departament']))
-            echo "<h6>Error on Update.</h6>";
+        if(!Departament::update($params['id'], $params['departament'])) {
+            $_SESSION[ 'flash' ][ 'error' ] = "Could not be Updated.";
+        } else {
+            $_SESSION[ 'flash' ][ 'notice' ] = "Departament successfuly updated!";
+        }
                
         $departaments = Departament::getAll();
         
@@ -96,8 +115,11 @@ class DepartamentsController extends ApplicationController implements IControlle
      */
     function delete ($params) {
         
-        if(!Departament::delete($params['id']))
-            echo "<h6>Error on Delete.</h6>";
+        if(!Departament::delete($params['id'])) {
+            $_SESSION[ 'flash' ][ 'error' ] = "Could not be Deleted.";
+        } else {
+            $_SESSION[ 'flash' ][ 'notice' ] = "Departament successfuly deleted!";
+        }
 
         Route::redirectTo("departaments");
         
@@ -113,10 +135,16 @@ class DepartamentsController extends ApplicationController implements IControlle
             
         if($departaments->count() > 0) {
             
-            $this->renderView("departaments", "_departaments", 'none', "Listing Departaments", $departaments);
+            if($this->isAjax()) {
+                $this->renderView("departaments", "_departaments", 'none', "Listing Departaments", $departaments);
+            } else {
+                $this->renderView("departaments", $this->defaultView, $this->layout, "Listing Departaments", $departaments);
+            }
                         
         } else {
-            echo "<h6>No departaments found.</h6>";
+            
+            $_SESSION[ 'flash' ][ 'error' ] = "No departaments found.";
+            
         }
         
     }
@@ -129,7 +157,18 @@ class DepartamentsController extends ApplicationController implements IControlle
         
         $departaments = Departament::show($params['id']);
             
-        $this->renderView("departaments", "show", $this->layout, "Show Departament", $departaments, $params);
+        if(isset($params['format']) && $params['format'] != "html" ) {
+            if($params['format'] == "json") {
+                header( 'Content-type: application/json' );
+            } else if ($params['format'] == "xml") {
+                header( 'Content-type: application/xml' );
+            } else if ($params['format'] == "js") {
+               header( 'Content-type: application/javascript' );
+            }
+            $this->renderView("departaments", "index", 'none', "Listing Departaments", $departaments, $params);
+        } else {
+            $this->renderView("departaments", "show", $this->layout, "Show Departament", $departaments, $params);
+        }
         
     }
 

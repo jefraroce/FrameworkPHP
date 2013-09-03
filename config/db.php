@@ -58,7 +58,8 @@ class Db {
      * @return boolean
      */
     public static function delete($id) {
-        if(self::getCon()->remove(array('_id' => new MongoId($id)), array("justOne" => true))) {
+        $result = self::getCon()->remove(array('_idddd' => $id), array("justOne" => true, "w" => 1));
+        if($result['err'] != null) {
             return true;
         }
         return false;

@@ -35,13 +35,6 @@ class DepartamentsController extends ApplicationController implements IControlle
         $departaments = Departament::getAll();
         
         if(isset($params['format']) && $params['format'] != "html" ) {
-            if($params['format'] == "json") {
-                header( 'Content-type: application/json' );
-            } else if ($params['format'] == "xml") {
-                header( 'Content-type: application/xml' );
-            } else if ($params['format'] == "js") {
-               header( 'Content-type: application/javascript' );
-            }
             $this->renderView("departaments", "index", 'none', "Listing Departaments", $departaments, $params);
         } else {
             $this->renderView("departaments", '', $this->layout, "Listing Departaments", $departaments);
@@ -158,13 +151,6 @@ class DepartamentsController extends ApplicationController implements IControlle
         $departaments = Departament::show($params['id']);
             
         if(isset($params['format']) && $params['format'] != "html" ) {
-            if($params['format'] == "json") {
-                header( 'Content-type: application/json' );
-            } else if ($params['format'] == "xml") {
-                header( 'Content-type: application/xml' );
-            } else if ($params['format'] == "js") {
-               header( 'Content-type: application/javascript' );
-            }
             $this->renderView("departaments", "index", 'none', "Listing Departaments", $departaments, $params);
         } else {
             $this->renderView("departaments", "show", $this->layout, "Show Departament", $departaments, $params);

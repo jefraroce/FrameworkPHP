@@ -33,14 +33,7 @@ class CountriesController extends ApplicationController implements IController {
         
         $countries = Country::getAll();
         
-        if(isset($params['format']) && $params['format'] != "html" ) {
-            if($params['format'] == "json") {
-                header( 'Content-type: application/json' );
-            } else if ($params['format'] == "xml") {
-                header( 'Content-type: application/xml' );                
-            } else if ($params['format'] == "js") {
-                header( 'Content-type: application/javascript' );
-            }
+        if(isset($params['format']) && $params['format'] != "html" ) {            
             $this->renderView("countries", "index", 'none', "Listing Countries", $countries, $params);
         } else {
             $this->renderView("countries", $this->defaultView, $this->layout, "Listing Countries", $countries);
@@ -152,13 +145,6 @@ class CountriesController extends ApplicationController implements IController {
         $countries = Country::show($params['id']);
         
         if(isset($params['format']) && $params['format'] != "html" ) {
-            if($params['format'] == "json") {
-                header( 'Content-type: application/json' );
-            } else if ($params['format'] == "xml") {
-                header( 'Content-type: application/xml' );                
-            } else if ($params['format'] == "js") {
-                header( 'Content-type: application/javascript' );
-            }
             $this->renderView("countries", "index", 'none', "Listing Countries", $countries, $params);
         } else {
             $this->renderView("countries", "show", $this->layout, "Show Country", $countries);

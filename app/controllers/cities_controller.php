@@ -35,13 +35,6 @@ class CitiesController extends ApplicationController implements IController {
         $cities = City::getAll();
         
         if(isset($params['format']) && $params['format'] != "html" ) {
-            if($params['format'] == "json") {
-                header( 'Content-type: application/json' );
-            } else if ($params['format'] == "xml") {
-                header( 'Content-type: application/xml' );
-            } else if ($params['format'] == "js") {
-               header( 'Content-type: application/javascript' );
-            }
             $this->renderView("cities", "index", 'none', "Listing Cities", $cities, $params);
         } else {
             $this->renderView("cities", '', $this->layout, "Listing cities", $cities);
@@ -158,13 +151,6 @@ class CitiesController extends ApplicationController implements IController {
         $cities = City::show($params['id']);
             
         if(isset($params['format']) && $params['format'] != "html" ) {
-            if($params['format'] == "json") {
-                header( 'Content-type: application/json' );
-            } else if ($params['format'] == "xml") {
-                header( 'Content-type: application/xml' );
-            } else if ($params['format'] == "js") {
-               header( 'Content-type: application/javascript' );
-            }
             $this->renderView("cities", "index", 'none', "Listing Cities", $cities, $params);
         } else {
             $this->renderView("cities", "show", $this->layout, "Show City", $cities, $params);

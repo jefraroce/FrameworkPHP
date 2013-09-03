@@ -83,6 +83,14 @@ class ApplicationController {
         
         $format = isset($params['format']) ? $params['format'] : "html";
         
+        if($format == "json") {
+            header( 'Content-type: application/json' );
+        } else if ($format == "xml") {
+            header( 'Content-type: application/xml' );                
+        } else if ($format == "js") {
+            header( 'Content-type: application/javascript' );
+        }
+        
         $content = $this->loadPage(Route::getViewPath($controller, $view, $format), $collection, $params);
         
         if( $layout != 'none') {

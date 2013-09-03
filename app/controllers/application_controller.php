@@ -77,13 +77,13 @@ class ApplicationController {
      * @param type $collection
      * @param type $params
      */
-    protected function renderView($controller, $view = '', $layout = '', $title = 'Test FrameworkPHP', $collection = null, $params = array()) {
+    protected function renderView($controller, $view = '', $layout = 'none', $title = 'Test FrameworkPHP', $collection = null, $params = array()) {
         
         $view = (empty($view) ? $this->defaultView : $view);
         
         $content = $this->loadPage(Route::getViewPath($controller, $view), $collection, $params);
         
-        if(!empty($layout)) {
+        if( $layout != 'none') {
             
             $pagina = $this->replaceContent('/\#CONTENIDO\#/ms', $content, $this->loadTemplate($title, $layout));
             

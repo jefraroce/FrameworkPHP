@@ -9,8 +9,8 @@ $n = 1;
             <td><?php echo utf8_encode($departament['country_id']);?></td>
             <td style="text-align: center;"><a href="<?php echo Route::getUrlFor("departaments", "show", array("id" => $departament['_id']) ); ?>">SHOW</a></td>
             <td style="text-align: center;"><a class="button-edit" href="<?php echo Route::getUrlFor("departaments", "edit", array("id" => $departament['_id'], "code" => $departament['code'], "name" => utf8_encode($departament['name']), "country_id" => utf8_encode($departament['country_id']) ) );?>">EDIT</a></td>
-            <td style="text-align: center;" ><a class="button-delete" onClick="if(confirm('Are you sure?')) {
-                deleteDepartament('<?php echo $departament['_id']; ?>'); 
+            <td style="text-align: center;" ><a class="button-delete" href="<?php echo Route::getUrlFor("departaments", "delete", array("id" => $departament['_id'])); ?>" onClick="if(!confirm('Are you sure?')) {
+                return false;
             }">DELETE</a></td>
        </tr>
     <?php $n++;

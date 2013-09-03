@@ -100,17 +100,7 @@ class CitiesController extends ApplicationController implements IController {
         if(!City::delete($params['id']))
             echo "<h6>Error on Delete.</h6>";
 
-        $cities = City::getAll();
-        
-        if($cities->count() > 0) {
-            
-            ob_start();
-            paintRow($cities);              
-            $this->viewPage(ob_get_clean());
-            
-        } else {
-            echo "<h6>No cities found.</h6>";
-        }
+        Route::redirectTo("cities");
         
     }
     
@@ -124,9 +114,7 @@ class CitiesController extends ApplicationController implements IController {
             
         if($cities->count() > 0) {
             
-            ob_start();
-            paintRow($cities);
-            $this->viewPage(ob_get_clean());
+            $this->renderView("cities", "_cities", 'none', "Listing Cities", $cities);
             
         } else {
             echo "<h6>No cities found.</h6>";

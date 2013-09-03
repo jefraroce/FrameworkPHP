@@ -212,5 +212,16 @@ class Route {
       
       return( $url );      
     } 
+    
+    /**
+     * Redirect to a specific url
+     * @param String $controller name controller
+     * @param String $action name action
+     * @param array $params array of parameters
+     */
+    public static function redirectTo( $controller, $action = '', $params = array() ) {
+        header( 'Location: ' . self::getUrlFor( $controller, $action, $params) );
+        exit( 0 );
+    }
      
 }

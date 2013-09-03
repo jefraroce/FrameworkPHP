@@ -93,18 +93,8 @@ class CountriesController extends ApplicationController implements IController {
         
         if(!Country::delete($params['id']))
             echo "<h6>Error on Delete.</h6>";
-
-        $countries = Country::getAll();
         
-        if($countries->count() > 0) {
-            
-            ob_start();
-            paintRow($countries);        
-            $this->viewPage(ob_get_clean());
-            
-        } else {
-            echo "<h6>No countries found.</h6>";
-        }
+        Route::redirectTo("countries");
         
     }
     
@@ -118,9 +108,7 @@ class CountriesController extends ApplicationController implements IController {
         
         if($countries->count() > 0) {
             
-            ob_start();
-            paintRow($countries);
-            $this->viewPage(ob_get_clean());
+            $this->renderView("countries", "_countries", 'none', "Listing Countries", $countries);
             
         } else {
             echo "<h6>No countries found.</h6>";

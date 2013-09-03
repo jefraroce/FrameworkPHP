@@ -99,17 +99,7 @@ class DepartamentsController extends ApplicationController implements IControlle
         if(!Departament::delete($params['id']))
             echo "<h6>Error on Delete.</h6>";
 
-        $departaments = Departament::getAll();
-        
-        if($departaments->count() > 0) {
-            
-            ob_start();
-            paintRow($departaments);              
-            $this->viewPage(ob_get_clean());
-            
-        } else {
-            echo "<h6>No departaments found.</h6>";
-        }
+        Route::redirectTo("departaments");
         
     }
     
@@ -123,10 +113,8 @@ class DepartamentsController extends ApplicationController implements IControlle
             
         if($departaments->count() > 0) {
             
-            ob_start();
-            paintRow($departaments);         
-            $this->viewPage(ob_get_clean());
-            
+            $this->renderView("departaments", "_departaments", 'none', "Listing Departaments", $departaments);
+                        
         } else {
             echo "<h6>No departaments found.</h6>";
         }

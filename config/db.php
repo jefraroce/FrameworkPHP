@@ -46,6 +46,7 @@ class Db {
      * @param type $object
      */
     public static function update($id, $object) {
+        unset($object['id']);
         if(self::getCon()->update(array('_id' => new MongoId($id)), $object)) {
             return true;
         }

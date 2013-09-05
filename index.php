@@ -13,7 +13,9 @@ require_once Route::getControllerPath($controller);
 $controllerClass = $controller."Controller";
 
 $controllerObj = new $controllerClass();
-    
+
+$params['format'] = (isset($params['format']) && $params['format'] == 'php' ? 'html' : $params['format']);
+
 if(!empty( $controllerObj ) && method_exists( $controllerObj, $action )) {
 
     $controllerObj->$action($params);

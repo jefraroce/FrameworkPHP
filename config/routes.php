@@ -170,7 +170,7 @@ class Route {
       
       if ( !empty( $controller ) ) { $url .= $controller; }
       if ( !empty( $action ) ) { $url .= '/' . $action; }
-      if ( !empty( $format ) ) { $url .= ( ( strpos( $url, '?' ) === false ) ? '?' : '&' ) . 'format=' . $format; }
+      if ( !empty( $format ) ) { $url .= '.' . $format; }
       if ( $params != null ) { 
           foreach ($params as $key=>$value) {
             $url .= ( ( strpos( $url, '?' ) === false ) ? '?' : '&' ) . $key."=".$value; 

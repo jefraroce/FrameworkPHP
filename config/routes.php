@@ -168,8 +168,8 @@ class Route {
     public static function getUrlFor( $controller, $action = '', $params = array(), $format = 'html' ) {
       $url = ( self::getCurrentUrl( true ).self::PATH_SEPARATOR );
       
-      if ( !empty( $controller ) ) { $url .= '?controller=' . $controller; }
-      if ( !empty( $action ) ) { $url .= ( ( strpos( $url, '?' ) === false ) ? '?' : '&' ) . 'action=' . $action; }
+      if ( !empty( $controller ) ) { $url .= $controller; }
+      if ( !empty( $action ) ) { $url .= '/' . $action; }
       if ( !empty( $format ) ) { $url .= ( ( strpos( $url, '?' ) === false ) ? '?' : '&' ) . 'format=' . $format; }
       if ( $params != null ) { 
           foreach ($params as $key=>$value) {

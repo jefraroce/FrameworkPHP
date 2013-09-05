@@ -1,8 +1,8 @@
 <div id="header">
     <h3>Test PHP</h3>
-    <a onClick="pathCountry();">Countries</a>
+    <a href="<?php echo Route::getUrlFor("countries"); ?>">Countries</a>
     &nbsp;|&nbsp;
-    <a onClick="pathDepartament();">Departaments</a>
+    <a href="<?php echo Route::getUrlFor("departaments"); ?>">Departaments</a>
     &nbsp;|&nbsp;
-    <a onClick="pathCity();">Cities</a>
+    <a href="<?php echo Route::getUrlFor("cities"); ?>">Cities</a>
 </div>

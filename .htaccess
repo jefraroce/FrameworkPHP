@@ -1,0 +1,15 @@
+RewriteEngine on
+
+  RewriteRule ^app - [L,NC]
+  RewriteRule ^controllers - [L,NC]
+  RewriteRule ^assets - [L,NC]
+  RewriteRule ^views - [L,NC]
+  RewriteRule ^models - [L,NC]
+  RewriteRule ^helpers - [L,NC]
+  RewriteRule ^config - [L,NC]
+  
+  IndexIgnore *
+
+  RewriteRule ^(.*)/(.*)/$ index.php?controller=$1&action=$2 [L,QSA]
+  RewriteRule ^(.*)/(.*)$ index.php?controller=$1&action=$2 [L,QSA]
+  RewriteRule ^(.*)/?$ index.php?controller=$1 [L,QSA]
